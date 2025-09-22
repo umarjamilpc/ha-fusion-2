@@ -1,7 +1,7 @@
 services:
   ha-fusion:
     container_name: ha-fusion
-    image: ghcr.io/matt8707/ha-fusion
+    image: ghcr.io/umarjamilpc/ha-fusion-2:latest
     volumes:
       - /path/to/ha-fusion:/app/data
     network_mode: bridge
