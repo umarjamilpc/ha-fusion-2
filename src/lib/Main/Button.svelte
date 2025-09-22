@@ -444,9 +444,7 @@
 		}
 	}
 
-	function onDestroy() {
-		unsubscribe?.();
-	}
+	onDestroy(() => unsubscribe?.());
 </script>
 
 <div
