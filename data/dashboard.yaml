@@ -1,0 +1,347 @@
+hide_sidebar: false
+hide_views: false
+sidebar:
+- hour12: false
+  id: 3781246197457
+  seconds: false
+  type: time
+- format: test
+  hide: none
+  id: 2790676345913
+  shortday: false
+  shortmonth: false
+  type: date
+- id: 1506524483596
+  template: <b>Vecka {{ now().strftime("%W") }}</b>
+  type: template
+- date: false
+  entity_id: sensor.template_greet
+  id: 2790676343773
+  type: sensor
+- entity_id: weather.openweathermap
+  extra_sensor: sensor.openweathermap_forecast_precipitation_probability
+  extra_sensor_icon: mdi:drop
+  icon_pack: meteocons
+  id: 2790676343766
+  type: weather
+  weather_sensor: sensor.openweathermap_weather
+- id: 6627143742873
+  type: divider
+- entity_id: sensor.template_laundry
+  id: 2790676343722
+  type: sensor
+- entity_id: sensor.template_vacuum
+  id: 2790676343733
+  type: sensor
+- date: false
+  entity_id: sensor.template_mailbox
+  id: 2790676343744
+  type: sensor
+- entity_id: sensor.template_battery
+  id: 2790676343711
+  type: sensor
+- id: 4055198699454
+  type: navigate
+- entity_id: timer.test
+  id: 5786160817081
+  type: timer
+- id: 3349273168863
+  type: divider
+- entity_id: sensor.processor_use
+  id: 1790176343741
+  name: CPU
+  stroke: 7
+  type: radial
+- entity_id: sensor.memory_use_percent
+  id: 2805049029311
+  math: '22'
+  name: RAM
+  type: bar
+- entity_id: sensor.memory_use_percent
+  id: 7932142060181
+  period: day
+  stroke: 2
+  type: graph
+sidebarWidth: 391
+theme: godis
+views:
+- id: 6467602449648
+  name: Hemma
+  sections:
+  - id: 5078078976670
+    sections:
+    - id: 2171067078835
+      items:
+      - entity_id: light.studio_dator
+        id: 5008685947164
+        shape: rectangle
+        type: button
+      - entity_id: light.vardagsrum
+        id: 6094154428386
+        name: Belysning
+        shape: rectangle
+        type: button
+      - color: '#1cd760'
+        entity_id: light.vardagsrum_horna
+        id: 4795962599238
+        marquee: true
+        name: "H\xC3\xB6rnlampa"
+        shape: rectangle
+        type: button
+      - entity_id: media_player.sony_bravia_tv
+        id: 7351468287678
+        shape: rectangle
+        type: button
+      - entity_id: switch.deltaco_sh_p01_socket
+        id: 3728122340522
+        shape: rectangle
+        type: button
+      name: Test
+    - id: 9828119797472
+      items:
+      - entity_id: light.studio_group
+        id: 3316142550855
+        shape: rectangle
+        type: button
+      - entity_id: switch.imac
+        id: 3575493192177
+        shape: rectangle
+        type: button
+      - entity_id: switch.gosund_monitors_switch
+        icon: material-symbols:speaker
+        id: 8082348418851
+        shape: rectangle
+        type: button
+      name: Studio
+    type: horizontal-stack
+  - id: 4240433563768
+    sections:
+    - id: 7859955675791
+      items:
+      - conditional:
+        - color: orange
+          entity_id: sensor.plex_recently_added
+          icon: mdi:plex
+          name: Senast tillagt
+        - entity_id: media_player.vardagsrum
+        - entity_id: media_player.sovrum
+        - entity_id: media_player.spotify
+          icon: mdi:spotify
+        - entity_id: media_player.kok
+        id: 5276106620601
+        shape: rectangle
+        type: media
+      name: Media
+    - id: 7274165372538
+      items:
+      - entity_id: light.badrum_group
+        id: 4326750373921
+        shape: rectangle
+        type: button
+      - entity_id: switch.gosund_fan_switch
+        icon: mdi:fan
+        id: 6654837792944
+        shape: rectangle
+        type: button
+      - entity_id: light.garderob_lampa
+        icon: material-symbols:door-front-sharp
+        id: 9182560073626
+        name: Garderob
+        shape: rectangle
+        type: button
+      - entity_id: light.hall_group
+        id: 6583508288448
+        name: Hall
+        shape: rectangle
+        type: button
+      - entity_id: light.sovrum_group
+        id: 4536918822520
+        shape: rectangle
+        type: button
+      - entity_id: climate.ac
+        id: 2763550457343
+        marquee: true
+        name: Klimat
+        shape: rectangle
+        type: button
+      - color: '#1cd760'
+        entity_id: switch.ps5_635_power
+        id: 8427787269294
+        marquee: true
+        name: Playstation
+        shape: rectangle
+        type: button
+      - entity_id: media_player.samsung
+        id: 1503994513807
+        shape: rectangle
+        type: button
+      name: "\xC3\u2013vrigt"
+    type: horizontal-stack
+  - id: 1412018494330
+    items:
+    - entity_id: person.matte
+      icon: fluent-emoji-flat:alien
+      id: 5560216674913
+      shape: rectangle
+      type: button
+    - entity_id: person.sanja
+      id: 8128083996424
+      shape: rectangle
+      type: button
+    - entity_id: script.home_leave
+      icon: fluent:hand-wave-20-filled
+      id: 3574383219011
+      shape: rectangle
+      type: button
+    - entity_id: script.home_arrive
+      icon: material-symbols:home-rounded
+      id: 3827902926530
+      shape: rectangle
+      type: button
+    name: Hemma
+- icon: material-symbols:filter-list-rounded
+  id: 5813909951190
+  name: Entities
+  sections:
+  - id: 3178723045273
+    items:
+    - entity_id: timer.test
+      id: 3188058166584
+      name: Timer
+      shape: rectangle
+      type: button
+    - entity_id: update.hacs_update
+      id: 4014538054364
+      name: Update
+      shape: rectangle
+      type: button
+    - entity_id: vacuum.morty
+      id: 1542804203536
+      name: Vacuum
+      shape: rectangle
+      type: button
+    - entity_id: weather.smhi_home
+      id: 6145994572695
+      name: Weather
+      shape: rectangle
+      type: button
+    - entity_id: zone.home
+      id: 1443718504784
+      name: Zone
+      shape: rectangle
+      type: button
+    - entity_id: sun.sun
+      id: 8859082285036
+      shape: rectangle
+      type: button
+    - entity_id: switch.galaxy_tab_a_screensaver
+      id: 3600633343715
+      name: Switch
+      shape: rectangle
+      type: button
+    - entity_id: sensor.badrum_motion_battery
+      id: 8233675559365
+      name: Sensor
+      shape: rectangle
+      type: button
+    - entity_id: select.conditional_media
+      id: 7404639096964
+      name: Select
+      shape: rectangle
+      type: button
+    - entity_id: script.home_arrive
+      id: 8625756439435
+      name: Script
+      shape: rectangle
+      type: button
+    - entity_id: scene.home_below_horizon
+      id: 5713628080695
+      name: Scene
+      shape: rectangle
+      type: button
+    - entity_id: remote.vardagsrum
+      id: 4572210401136
+      name: Remote
+      shape: rectangle
+      type: button
+    - entity_id: person.matte
+      id: 4275494337776
+      name: Person
+      shape: rectangle
+      type: button
+    - entity_id: number.galaxy_tab_a_screensaver_brightness
+      id: 6609447826960
+      name: Number
+      shape: rectangle
+      type: button
+    - entity_id: media_player.tablet
+      id: 8822164265367
+      name: Media player
+      shape: rectangle
+      type: button
+    - entity_id: light.studio_dator
+      id: 6295149030308
+      name: Light
+      shape: rectangle
+      type: button
+    - entity_id: input_number.monitors_volume
+      id: 9445324699683
+      name: Input number
+      shape: rectangle
+      type: button
+    - entity_id: input_datetime.sleep_notify_torrent
+      id: 2832875690525
+      name: Input Datetime
+      shape: rectangle
+      type: button
+    - entity_id: input_boolean.imac_lock
+      id: 5329753290519
+      name: Input boolean
+      shape: rectangle
+      type: button
+    - entity_id: event.badrum_dimmer_button_1
+      id: 8154800117105
+      name: Event
+      shape: rectangle
+      type: button
+    - entity_id: image.template_image
+      id: 6399086292020
+      name: Image
+      shape: rectangle
+      type: button
+    - entity_id: device_tracker.iphone
+      id: 8970334871265
+      name: Device tracker
+      shape: rectangle
+      type: button
+    - entity_id: climate.ac
+      id: 5981318553491
+      name: Climate
+      shape: rectangle
+      type: button
+    - entity_id: automation.backup_ha_monthly
+      id: 1477424416058
+      name: Automation
+      shape: rectangle
+      type: button
+    - entity_id: binary_sensor.galaxy_tab_a_device_admin
+      id: 1045768288013
+      name: Binary sensor
+      shape: rectangle
+      type: button
+    - entity_id: button.galaxy_tab_a_load_start_url
+      id: 7826433574180
+      name: Button
+      shape: rectangle
+      type: button
+    - entity_id: calendar.home_assistant_devs
+      id: 8928742612730
+      name: Calendar
+      shape: rectangle
+      type: button
+    - entity_id: camera.ipcam
+      id: 4466621036589
+      name: Camera
+      shape: rectangle
+      type: button
+    name: Test
