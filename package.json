@@ -59,7 +59,7 @@
 		"dotenv": "^16.4.5",
 		"express": "^4.21.1",
 		"hls.js": "^1.5.16",
-		"home-assistant-js-websocket": "^9.4.0",
+		"home-assistant-js-websocket": "^9.5.0",
 		"http-proxy-middleware": "^3.0.3",
 		"js-yaml": "^4.1.0",
 		"konva": "^9.3.15",
