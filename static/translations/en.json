@@ -21,19 +21,15 @@
 	"appearance": "Appearance",
 	"armed": "Armed",
 	"armed_away": "Armed away",
-	"armed_custom_bypass": "Armed custom bypass",
+	"armed_custom_bypass": "Custom bypass",
 	"armed_home": "Armed home",
 	"armed_night": "Armed night",
-	"armed_vacation": "Armed vacation",
+	"armed_vacation": "Vacation",
 	"arming": "Arming",
 	"aspect_ratio": "Aspect ratio",
 	"attributes": "Attributes",
 	"auth": "Application credentials",
-  "entity_shape": "Entity Shape",
-  "rectangle": "Rectangle",
-  "square": "Square",
-  "shape": "Shape"
-}
+	"auto": "Auto",
 	"automation": "Automation",
 	"back": "Back",
 	"balanced": "Balanced",
@@ -147,8 +143,7 @@
 	"graph": "Graph",
 	"group": "Group",
 	"ha_url": "Home Assistant URL",
-	"heat": "Heat",
-	"heat_cool": "Heat/Cool",
+	"heat": "Heat/Cool",
 	"heating": "Heating",
 	"hidden": "Hidden",
 	"hide": "Hide",
@@ -390,5 +385,9 @@
 	"week": "Week",
 	"welcome_home": "Welcome Home",
 	"year": "year",
-	"yes": "Yes"
+	"yes": "Yes",
+        "entity_shape": "Entity Shape",
+        "rectangle": "Rectangle",
+        "square": "Square",
+        "shape": "Shape"
 }
