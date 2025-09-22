@@ -88,15 +88,6 @@
 			}
 		},
 		{
-			id: 'square',
-			type: $lang('square'),
-			component: Button,
-			props: {
-				demo: $demo.sensor,
-				sel
-			}
-		},
-		{
 			id: 'camera',
 			type: $lang('camera'),
 			component: Camera,
@@ -147,7 +138,6 @@
 
 		switch (sel?.type) {
 			case 'button':
-			case 'square':
 				openModal(() => import('$lib/Modal/ButtonConfig.svelte'), {
 					demo: $demo.sensor,
 					sel

@@ -30,8 +30,6 @@
 	export let sel: any;
 	export let sectionName: string | undefined = undefined;
 
-	$: console.log("sel", sel);
-
 	$: entity_id = demo || sel?.entity_id;
 	$: template = $templates?.[sel?.id];
 	$: icon = (sel?.template?.icon && template?.icon?.output) || sel?.icon;
@@ -446,16 +444,22 @@
 		}
 	}
 
-	onDestroy(() => unsubscribe?.());
+	function onDestroy() {
+		unsubscribe?.();
+	}
 </script>
 
 <div
 	class="container"
+	class:square={sel?.shape === 'square'}
 	bind:this={container}
 	data-state={stateOn}
 	tabindex="-1"
 	style={!$editMode ? 'cursor: pointer;' : ''}
-	style:min-height="{$itemHeight}px"
+	style:min-height={sel?.shape === 'square'
+		? sel?.height || '64px'
+		: $itemHeight + 'px'}
+	style:height={sel?.shape === 'square' ? sel?.height : undefined}
 	on:pointerenter={handlePointer}
 	on:pointerdown={handlePointer}
 	use:Ripple={{
@@ -514,13 +518,7 @@
 			{:else if entity_id}
 				<ComputeIcon {entity_id} />
 			{:else}
-				{#if sel?.shape === 'rectangle'}
-					<div class="shape rectangle" style="width: {sel?.size}px; height: {sel?.size / 2}px; background-color: var(--icon-color); border-radius: 0.65rem;"></div>
-				{:else if sel?.shape === 'square'}
-					<div class="shape square" style="width: {sel?.size}px; height: {sel?.size}px; background-color: var(--icon-color);"></div>
-				{:else}
-					<Icon icon="ooui:help-ltr" height="none" width="100%" />
-				{/if}
+				<Icon icon="ooui:help-ltr" height="none" width="100%" />
 			{/if}
 		</div>
 	</div>
@@ -600,7 +598,7 @@
 	}
 
 	.icon {
-		--icon-size: 3.4rem;
+		--icon-size: 2.4rem;
 		grid-area: icon;
 		height: var(--icon-size);
 		width: var(--icon-size);
@@ -639,6 +637,31 @@
 		margin-top: 1px;
 	}
 
+	.square {
+		grid-template-columns: auto;
+		grid-template-rows: auto auto;
+		grid-template-areas: 'icon' 'name';
+		place-items: center;
+		padding: 0.5rem;
+	}
+
+	.square .left {
+		padding: 0;
+	}
+
+	.square .right {
+		padding: 0;
+		text-align: center;
+	}
+
+	.square .name {
+		font-size: 0.8rem;
+	}
+
+	.square .state {
+		display: none;
+	}
+
 	.container[data-state='true'] {
 		background-color: var(--theme-button-background-color-on);
 		color: black;
@@ -655,10 +678,6 @@
 
 	.state[data-state='true'] {
 		color: var(--theme-button-state-color-on);
-	}
-
-	.shape {
-		border-radius: 0.65rem;
 	}
 
 	/* Phone and Tablet (portrait) */

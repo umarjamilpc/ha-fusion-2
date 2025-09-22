@@ -18,6 +18,8 @@
 	import Ripple from 'svelte-ripple';
 	import InputClear from '$lib/Components/InputClear.svelte';
 	import ConfigButtons from '$lib/Modal/ConfigButtons.svelte';
+	import Toggle from '$lib/Components/Toggle.svelte';
+	import { slide } from 'svelte/transition';
 	import { updateObj, getDomain, getName, getTogglableService } from '$lib/Utils';
 	import type { ButtonItem } from '$lib/Types';
 	import { openModal } from 'svelte-modals';
@@ -40,21 +42,13 @@
 	let icon = sel?.icon;
 	let state = sel?.state;
 	let computedIcon: string;
-	let shape = sel?.shape || 'rectangle';
-	let size = sel?.size || 50;
 
 	$: options = $entityList('');
 
 	$: template = $templates?.[sel?.id];
 
 	function set(key: string, event?: any) {
-		if (key === 'shape') {
-			sel = { ...sel, shape: event };
-		} else if (key === 'size') {
-			sel = { ...sel, size: event.target.value };
-		} else {
-			sel = updateObj(sel, key, event);
-		}
+		sel = updateObj(sel, key, event);
 		$dashboard = $dashboard;
 	}
 
@@ -94,6 +88,37 @@
 		<div style:pointer-events="none">
 			<Button {sel} {sectionName} />
 		</div>
+
+		<h2>{$lang('size')}</h2>
+
+		<div class="button-container">
+			<button
+				class:selected={!sel?.shape}
+				on:click={() => set('shape')}
+				use:Ripple={$ripple}>{$lang('rectangle')}</button
+			>
+			<button
+				class:selected={sel?.shape === 'square'}
+				on:click={() => set('shape', 'square')}
+				use:Ripple={$ripple}>{$lang('square')}</button
+			>
+		</div>
+
+		{#if sel?.shape === 'square'}
+			<div transition:slide|local>
+				<h2>{$lang('height')}</h2>
+				<input
+					name={$lang('height')}
+					class="input"
+					type="text"
+					placeholder="64px"
+					autocomplete="off"
+					spellcheck="false"
+					value={sel?.height}
+					on:change={(event) => set('height', event)}
+				/>
+			</div>
+		{/if}
 
 		<h2>{$lang('entity')}</h2>
 
@@ -343,39 +368,6 @@
 			>
 				<Icon icon="ph:brackets-curly-bold" height="none" /></button
 			>
-		</div>
-
-		<h2>{$lang('service')}</h2>
-
-		<h2>{$lang('shape')}</h2>
-
-		<div class="icon-gallery-container">
-			<select bind:value={shape} on:change={() => set('shape', shape)}>
-				<option value="rectangle">{$lang('rectangle')}</option>
-				<option value="square">{$lang('square')}</option>
-			</select>
-		</div>
-
-		<h2>{$lang('size')}</h2>
-
-		<div class="icon-gallery-container">
-			<InputClear
-				condition={size}
-				on:clear={() => {
-					size = undefined;
-					set('size');
-				}}
-				let:padding
-			>
-				<input
-					name={$lang('size')}
-					class="input"
-					type="number"
-					bind:value={size}
-					on:change={(event) => set('size', event)}
-					style:padding
-				/>
-			</InputClear>
 		</div>
 
 		<h2>{$lang('service')}</h2>
