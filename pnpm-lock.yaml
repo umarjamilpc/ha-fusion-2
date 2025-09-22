@@ -60,8 +60,8 @@ importers:
         specifier: ^1.5.16
         version: 1.5.16
       home-assistant-js-websocket:
-        specifier: ^9.4.0
-        version: 9.4.0
+        specifier: ^9.5.0
+        version: 9.5.0
       http-proxy-middleware:
         specifier: ^3.0.3
         version: 3.0.3
@@ -1296,8 +1296,8 @@ packages:
   hls.js@1.5.16:
     resolution: {integrity: sha512-+wAWr4aeRq9ODN8/Vgz0Cee1Cw6Ysr7vyEkZJCwOJYNwlld7CNmhKE+dLwfpUO2UuotYLGF0of6UFiN6zA7mig==}
 
-  home-assistant-js-websocket@9.4.0:
-    resolution: {integrity: sha512-312TuI63IfKf8G+iWvKmPYIdxWMNojwVk03o9OSpQFFDjSCNAYdCUfuPCFs73SuJ1Xpd4D1Eo11CB33MGMqZ+Q==}
+  home-assistant-js-websocket@9.5.0:
+    resolution: {integrity: sha512-gCBX0ulIPW3o5EhYxyNKgztBwNIs7u4hypZ+rcWir65wjLKL3b5uDx1jzU7RceyuANxvVKwBVLNujBeFohjnUw==}
 
   http-errors@2.0.0:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
@@ -3179,7 +3179,7 @@ snapshots:
 
   hls.js@1.5.16: {}
 
-  home-assistant-js-websocket@9.4.0: {}
+  home-assistant-js-websocket@9.5.0: {}
 
   http-errors@2.0.0:
     dependencies:
