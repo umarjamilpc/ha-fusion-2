@@ -30,6 +30,8 @@
 	export let sel: any;
 	export let sectionName: string | undefined = undefined;
 
+	$: console.log("sel", sel);
+
 	$: entity_id = demo || sel?.entity_id;
 	$: template = $templates?.[sel?.id];
 	$: icon = (sel?.template?.icon && template?.icon?.output) || sel?.icon;
@@ -513,9 +515,9 @@
 				<ComputeIcon {entity_id} />
 			{:else}
 				{#if sel?.shape === 'rectangle'}
-					<div style="width: {sel?.size}px; height: {sel?.size / 2}px; background-color: var(--icon-color); border-radius: 0.65rem;"></div>
+					<div class="shape rectangle" style="width: {sel?.size}px; height: {sel?.size / 2}px; background-color: var(--icon-color); border-radius: 0.65rem;"></div>
 				{:else if sel?.shape === 'square'}
-					<div style="width: {sel?.size}px; height: {sel?.size}px; background-color: var(--icon-color);"></div>
+					<div class="shape square" style="width: {sel?.size}px; height: {sel?.size}px; background-color: var(--icon-color);"></div>
 				{:else}
 					<Icon icon="ooui:help-ltr" height="none" width="100%" />
 				{/if}
@@ -653,6 +655,10 @@
 
 	.state[data-state='true'] {
 		color: var(--theme-button-state-color-on);
+	}
+
+	.shape {
+		border-radius: 0.65rem;
 	}
 
 	/* Phone and Tablet (portrait) */
