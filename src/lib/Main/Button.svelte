@@ -512,7 +512,13 @@
 			{:else if entity_id}
 				<ComputeIcon {entity_id} />
 			{:else}
-				<Icon icon="ooui:help-ltr" height="none" width="100%" />
+				{#if sel?.shape === 'rectangle'}
+					<div style="width: {sel?.size}px; height: {sel?.size / 2}px; background-color: var(--icon-color); border-radius: 0.65rem;"></div>
+				{:else if sel?.shape === 'square'}
+					<div style="width: {sel?.size}px; height: {sel?.size}px; background-color: var(--icon-color);"></div>
+				{:else}
+					<Icon icon="ooui:help-ltr" height="none" width="100%" />
+				{/if}
 			{/if}
 		</div>
 	</div>
@@ -592,7 +598,7 @@
 	}
 
 	.icon {
-		--icon-size: 2.4rem;
+		--icon-size: 3.4rem;
 		grid-area: icon;
 		height: var(--icon-size);
 		width: var(--icon-size);

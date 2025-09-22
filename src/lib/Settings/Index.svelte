@@ -5,7 +5,6 @@
 	import { modals, closeModal } from 'svelte-modals';
 	import Modal from '$lib/Modal/Index.svelte';
 	import Language from '$lib/Settings/Language.svelte';
-	import EntityShape from '$lib/Settings/EntityShape.svelte';
 	import Addons from '$lib/Settings/Addons.svelte';
 	import Motion from '$lib/Settings/Motion.svelte';
 	import Version from '$lib/Settings/Version.svelte';
@@ -121,7 +120,6 @@
 
 		<form id="settings" name="settings" bind:this={formElement} on:submit|preventDefault>
 			<Language {languages} />
-			<EntityShape />
 
 			<Token />
 

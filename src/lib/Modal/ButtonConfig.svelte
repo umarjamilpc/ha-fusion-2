@@ -40,13 +40,21 @@
 	let icon = sel?.icon;
 	let state = sel?.state;
 	let computedIcon: string;
+	let shape = sel?.shape || 'rectangle';
+	let size = sel?.size || 50;
 
 	$: options = $entityList('');
 
 	$: template = $templates?.[sel?.id];
 
 	function set(key: string, event?: any) {
-		sel = updateObj(sel, key, event);
+		if (key === 'shape') {
+			sel = { ...sel, shape: event };
+		} else if (key === 'size') {
+			sel = { ...sel, size: event.target.value };
+		} else {
+			sel = updateObj(sel, key, event);
+		}
 		$dashboard = $dashboard;
 	}
 
@@ -105,15 +113,6 @@
 						computedIcon = event?.detail;
 					}}
 				/>
-			</div>
-
-			<h2>{$lang('shape')}</h2>
-
-			<div class="icon-gallery-container">
-				<select bind:value={sel.shape} on:change={() => $dashboard = $dashboard}>
-					<option value="rectangle">{$lang('rectangle')}</option>
-					<option value="square">{$lang('square')}</option>
-				</select>
 			</div>
 
 			<button
@@ -344,6 +343,39 @@
 			>
 				<Icon icon="ph:brackets-curly-bold" height="none" /></button
 			>
+		</div>
+
+		<h2>{$lang('service')}</h2>
+
+		<h2>{$lang('shape')}</h2>
+
+		<div class="icon-gallery-container">
+			<select bind:value={shape} on:change={() => set('shape', shape)}>
+				<option value="rectangle">{$lang('rectangle')}</option>
+				<option value="square">{$lang('square')}</option>
+			</select>
+		</div>
+
+		<h2>{$lang('size')}</h2>
+
+		<div class="icon-gallery-container">
+			<InputClear
+				condition={size}
+				on:clear={() => {
+					size = undefined;
+					set('size');
+				}}
+				let:padding
+			>
+				<input
+					name={$lang('size')}
+					class="input"
+					type="number"
+					bind:value={size}
+					on:change={(event) => set('size', event)}
+					style:padding
+				/>
+			</InputClear>
 		</div>
 
 		<h2>{$lang('service')}</h2>

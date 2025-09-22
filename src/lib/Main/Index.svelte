@@ -180,7 +180,14 @@
     `;
 	}
 
-
+	function itemStyles(type: string) {
+		const large = ['conditional_media', 'picture_elements', 'camera'];
+		return `
+			grid-column: ${large.includes(type) ? 'span 2' : 'span 1'};
+			grid-row: ${large.includes(type) ? 'span 4' : 'span 1'};
+			display: ${type ? '' : 'none'};
+    `;
+	}
 
 	/**
 	 * dnd transformDraggedElement
@@ -266,15 +273,10 @@
 		? view?.sections
 		: typeof mounted === 'boolean' &&
 			typeof $mediaQueries === 'object' &&
-					handleVisibility($editMode, view?.sections, $states);
-
-	function getItemStyle(item) {
-	  return `height: ${item.shape === 'square' ? '14.5rem' : 'auto'};`;
-	}
+			handleVisibility($editMode, view?.sections, $states);
 </script>
 
 <main
-	style:--entity-height={$configuration.entityShape === 'square' ? '14.5rem' : 'auto'}
 	style:transition="opacity {$motion}ms ease, outline-color {$motion}ms ease"
 	style:opacity={$editMode && view?.sections.length === 0 ? '0' : '1'}
 	use:dndzone={{ ...dndOptions, type: 'section', items: view.sections }}
@@ -335,7 +337,7 @@
 										class="item"
 										animate:flip={{ duration: $motion }}
 										tabindex="-1"
-										style={getItemStyle(item)}
+										style={itemStyles(item?.type)}
 									>
 										<Content {item} sectionName={stackSection?.name} />
 									</div>
@@ -398,10 +400,10 @@
 						<div
 							id={item?.id}
 							data-is-dnd-shadow-item-hint={item?.[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
-										class="item"
-										animate:flip={{ duration: $motion }}
-										tabindex="-1"
-										style={getItemStyle(item)}
+							class="item"
+							animate:flip={{ duration: $motion }}
+							tabindex="-1"
+							style={itemStyles(item?.type)}
 						>
 							<Content {item} sectionName={section?.name} />
 						</div>
@@ -450,7 +452,6 @@
 	.item {
 		position: relative;
 		border-radius: 0.65rem;
-		height: var(--entity-height);
 	}
 
 	/* Phone and Tablet (portrait) */
