@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 
 # install, build and prune
-RUN npm install --verbose && \
+RUN npm install --force --verbose && \
   npm run build && \
   npm prune --omit=dev
 
