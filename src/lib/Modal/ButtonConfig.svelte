@@ -104,21 +104,33 @@
 			>
 		</div>
 
-		{#if sel?.shape === 'square'}
-			<div transition:slide|local>
-				<h2>{$lang('height')}</h2>
-				<input
-					name={$lang('height')}
-					class="input"
-					type="text"
-					placeholder="64px"
-					autocomplete="off"
-					spellcheck="false"
-					value={sel?.height}
-					on:change={(event) => set('height', event)}
-				/>
-			</div>
-		{/if}
+		<div transition:slide|local>
+			<h2>{$lang('width')}</h2>
+			<input
+				name={$lang('width')}
+				class="input"
+				type="text"
+				placeholder="100%"
+				autocomplete="off"
+				spellcheck="false"
+				value={sel?.width}
+				on:change={(event) => set('width', event)}
+			/>
+		</div>
+
+		<div transition:slide|local>
+			<h2>{$lang('height')}</h2>
+			<input
+				name={$lang('height')}
+				class="input"
+				type="text"
+				placeholder="64px"
+				autocomplete="off"
+				spellcheck="false"
+				value={sel?.height}
+				on:change={(event) => set('height', event)}
+			/>
+		</div>
 
 		<h2>{$lang('entity')}</h2>
 

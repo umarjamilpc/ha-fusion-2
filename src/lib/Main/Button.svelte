@@ -454,10 +454,9 @@
 	data-state={stateOn}
 	tabindex="-1"
 	style={!$editMode ? 'cursor: pointer;' : ''}
-	style:min-height={sel?.shape === 'square'
-		? sel?.height || '64px'
-		: $itemHeight + 'px'}
-	style:height={sel?.shape === 'square' ? sel?.height : undefined}
+	style:width={sel?.width}
+	style:min-height={sel?.height || $itemHeight + 'px'}
+	style:height={sel?.height}
 	on:pointerenter={handlePointer}
 	on:pointerdown={handlePointer}
 	use:Ripple={{
@@ -681,7 +680,7 @@
 	/* Phone and Tablet (portrait) */
 	@media all and (max-width: 768px) {
 		.container {
-			width: calc(50vw - 1.45rem);
+			width: {sel?.width ? sel?.width : 'calc(50vw - 1.45rem)'};
 		}
 	}
 </style>
