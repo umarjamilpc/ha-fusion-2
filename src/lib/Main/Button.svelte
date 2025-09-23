@@ -487,7 +487,6 @@
 			class="icon"
 			data-state={stateOn}
 			style:--icon-color={iconColor}
-			style:--icon-size={sel?.icon_size || '3em'}
 			style:background-color={sel?.template?.color && template?.color?.output
 				? template?.color?.output
 				: undefined}
@@ -505,18 +504,18 @@
 			{:else if icon}
 				{#await loadIcon(icon)}
 					<!-- loading -->
-					<Icon icon="ooui:help-ltr" height="100%" width="100%" />
+					<Icon icon="ooui:help-ltr" height={sel?.icon_size || '100%'} width={sel?.icon_size || '100%'} />
 				{:then resolvedIcon}
 					<!-- exists -->
-					<Icon icon={resolvedIcon} height="100%" width="100%" />
+					<Icon icon={resolvedIcon} height={sel?.icon_size || '100%'} width={sel?.icon_size || '100%'} />
 				{:catch}
 					<!-- doesn't exist -->
-					<Icon icon="ooui:help-ltr" height="100%" width="100%" />
+					<Icon icon="ooui:help-ltr" height={sel?.icon_size || '100%'} width={sel?.icon_size || '100%'} />
 				{/await}
 			{:else if entity_id}
-				<ComputeIcon {entity_id} />
+				<ComputeIcon {entity_id} size={sel?.icon_size} />
 			{:else}
-				<Icon icon="ooui:help-ltr" height="100%" width="100%" />
+				<Icon icon="ooui:help-ltr" height={sel?.icon_size || '100%'} width={sel?.icon_size || '100%'} />
 			{/if}
 		</div>
 	</div>
@@ -596,10 +595,9 @@
 	}
 
 	.icon {
-		--icon-size: 2.4rem;
 		grid-area: icon;
-		height: var(--icon-size);
-		width: var(--icon-size);
+		height: 100%;
+		width: 100%;
 		color: rgb(200 200 200);
 		background-color: transparent;
 		border-radius: 0;

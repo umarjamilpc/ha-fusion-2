@@ -69,14 +69,14 @@
 	<!--  entity_picture  -->
 
 	{#if src}
-		<img {src} alt="" />
+		<img {src} alt="" style:width={size || '100%'} style:height={size || '100%'} />
 	{:else}
-		<Icon icon="ph:image-broken-duotone" height="auto" width="100%" />
+		<Icon icon="ph:image-broken-duotone" height={size || 'auto'} width={size || '100%'} />
 	{/if}
 {:else if currentIcon}
 	<!--  icon  -->
 
-	<Icon icon={currentIcon} style="font-size: {size || '2rem'}" />
+	<Icon icon={currentIcon} width={size || '2rem'} height={size || '2rem'} />
 {:else if entity_id && stateObj}
 	<!-- {(console.warn('icon missing ', entity_id, stateObj), '')} -->
 {/if}
