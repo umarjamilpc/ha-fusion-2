@@ -487,7 +487,7 @@
 			class="icon"
 			data-state={stateOn}
 			style:--icon-color={iconColor}
-			style:--icon-size={sel?.icon_size || '2.4rem'}
+			style:--icon-size={sel?.icon_size || '3em'}
 			style:background-color={sel?.template?.color && template?.color?.output
 				? template?.color?.output
 				: undefined}
@@ -601,12 +601,12 @@
 		height: var(--icon-size);
 		width: var(--icon-size);
 		color: rgb(200 200 200);
-		background-color: rgba(0, 0, 0, 0.25);
-		border-radius: 50%;
+		background-color: transparent;
+		border-radius: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: calc(var(--icon-size) * 0.22);
+		padding: 0;
 		background-position: center center;
 		background-size: cover;
 		background-repeat: no-repeat;

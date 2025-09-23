@@ -328,7 +328,7 @@
 				name={$lang('icon_size')}
 				class="input"
 				type="text"
-				placeholder="2.4rem"
+				placeholder="3em"
 				autocomplete="off"
 				spellcheck="false"
 				value={sel?.icon_size}
