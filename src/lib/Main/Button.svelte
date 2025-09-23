@@ -653,7 +653,7 @@
 	}
 
 	.square .state {
-		display: none;
+		display: block;
 	}
 
 	.container[data-state='true'] {
