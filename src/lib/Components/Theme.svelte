@@ -3,7 +3,6 @@
 	import { dashboard } from '$lib/Stores';
 
 	export let initial: any;
-	export let theme: any;
 
 	let css: string;
 

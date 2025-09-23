@@ -3,11 +3,8 @@
 	import { fade } from 'svelte/transition';
 	import { Modals, closeModal } from 'svelte-modals';
 	import Loader from '$lib/Components/Loader.svelte';
-	import Theme from '$lib/Components/Theme.svelte';
 	import '@fontsource-variable/inter';
 	import { expoOut } from 'svelte/easing';
-
-	export let data: any;
 </script>
 
 <svelte:head>
@@ -15,8 +12,6 @@
 	<meta name="description" content="fusion" />
 	<meta charset="utf-8" />
 </svelte:head>
-
-<Theme initial={data?.initial} theme={data?.initial?.theme} />
 
 <Modals>
 	<div
