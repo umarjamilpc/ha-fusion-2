@@ -599,15 +599,11 @@
 		height: 100%;
 		width: 100%;
 		color: rgb(200 200 200);
-		background-color: transparent; /* Make background transparent */
 		border-radius: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		padding: 0;
-		background-position: center center;
-		background-size: cover;
-		background-repeat: no-repeat;
 	}
 
 	.name {
@@ -665,7 +661,6 @@
 
 	.icon[data-state='true'] {
 		color: rgb(158, 160, 162); /* Change icon color when state is on */
-		background-color: var(--icon-color);
 	}
 
 	.name[data-state='true'] {
