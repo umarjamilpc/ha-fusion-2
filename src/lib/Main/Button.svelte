@@ -582,14 +582,16 @@
 	}
 
 	.left {
-		display: inherit;
+		display: flex;
+		align-items: center;
 		padding: var(--container-padding);
 	}
 
 	.right {
-		display: flex;
+                display: flex;
 		flex-direction: column;
 		justify-content: center;
+                align-items: start;
 		overflow: hidden;
 		padding-right: var(--container-padding);
 	}
