@@ -444,7 +444,7 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fill, 14.5rem);
 		grid-auto-rows: min-content;
-		gap: clamp(0.2rem, 1vw, 1rem);
+		gap: 0.4rem;
 		border-radius: 0.6rem;
 		height: 100%;
 	}
