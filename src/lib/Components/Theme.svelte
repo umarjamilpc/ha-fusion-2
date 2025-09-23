@@ -4,7 +4,9 @@
 
 	export let initial: any;
 
-	let css;
+	let css: string;
+
+	$: if (theme) update(theme);
 
 	/**
 	 * Map the theme entries into CSS variables
@@ -50,9 +52,23 @@
 			console.error(error);
 		}
 	}
+
+	function update(theme: any) {
+		css = `
+			/* button */
+			--theme-button-background-color-off: ${theme?.['button-background-color-off'] || '#414141'};
+			--theme-button-name-color-off: ${theme?.['button-name-color-off'] || 'white'};
+			--theme-button-state-color-off: ${theme?.['button-state-color-off'] || '#a7a7a7'};
+			--theme-button-background-color-on: ${theme?.['button-background-color-on'] || '#f2f2f2'};
+			--theme-button-name-color-on: ${theme?.['button-name-color-on'] || 'black'};
+			--theme-button-state-color-on: ${theme?.['button-state-color-on'] || '#5c5c5c'};
+
+			/* history */
+			--theme-history-color: ${theme?.['history-color'] || '#323232'};
+		`;
+	}
 </script>
 
 <svelte:head>
-	{@html `<style>:root {${css}}</style>`}
-	<meta name="theme-color" content={initial?.theme?.['app-color']} />
+	{@html `<style>${css}</style>`}
 </svelte:head>

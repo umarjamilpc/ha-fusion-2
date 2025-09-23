@@ -598,7 +598,7 @@
 		grid-area: icon;
 		height: 100%;
 		width: 100%;
-		color: rgb(200 200 200);
+		color: var(--theme-button-name-color-off);
 		background-color: transparent;
 		border-radius: 0;
 		display: flex;
@@ -660,12 +660,11 @@
 
 	.container[data-state='true'] {
 		background-color: var(--theme-button-background-color-on);
-		color: black;
+		color: var(--theme-button-name-color-on);
 	}
 
 	.icon[data-state='true'] {
-		color: white;
-		background-color: var(--icon-color);
+		color: var(--icon-color);
 	}
 
 	.name[data-state='true'] {
