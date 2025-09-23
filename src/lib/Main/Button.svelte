@@ -487,7 +487,7 @@
 			class="icon"
 			data-state={stateOn}
 			style:--icon-color={iconColor}
-			style:font-size={sel?.icon_size}
+			style:--icon-size={sel?.icon_size || '2.4rem'}
 			style:background-color={sel?.template?.color && template?.color?.output
 				? template?.color?.output
 				: undefined}
@@ -505,18 +505,18 @@
 			{:else if icon}
 				{#await loadIcon(icon)}
 					<!-- loading -->
-					<Icon icon="ooui:help-ltr" height="1em" width="1em" />
+					<Icon icon="ooui:help-ltr" height="100%" width="100%" />
 				{:then resolvedIcon}
 					<!-- exists -->
-					<Icon icon={resolvedIcon} height="1em" width="1em" />
+					<Icon icon={resolvedIcon} height="100%" width="100%" />
 				{:catch}
 					<!-- doesn't exist -->
-					<Icon icon="ooui:help-ltr" height="1em" width="1em" />
+					<Icon icon="ooui:help-ltr" height="100%" width="100%" />
 				{/await}
 			{:else if entity_id}
 				<ComputeIcon {entity_id} />
 			{:else}
-				<Icon icon="ooui:help-ltr" height="1em" width="1em" />
+				<Icon icon="ooui:help-ltr" height="100%" width="100%" />
 			{/if}
 		</div>
 	</div>
@@ -596,15 +596,17 @@
 	}
 
 	.icon {
-		font-size: 2.4rem;
+		--icon-size: 2.4rem;
 		grid-area: icon;
-		height: 1.75em;
-		width: 1.75em;
+		height: var(--icon-size);
+		width: var(--icon-size);
 		color: rgb(200 200 200);
 		background-color: rgba(0, 0, 0, 0.25);
 		border-radius: 50%;
-		display: grid;
-		place-items: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: calc(var(--icon-size) * 0.22);
 		background-position: center center;
 		background-size: cover;
 		background-repeat: no-repeat;
