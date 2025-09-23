@@ -487,7 +487,7 @@
 			class="icon"
 			data-state={stateOn}
 			style:--icon-color={iconColor}
-			style:--icon-size={sel?.icon_size || '2.4rem'}
+			style:--icon-size={sel?.icon_size}
 			style:background-color={sel?.template?.color && template?.color?.output
 				? template?.color?.output
 				: undefined}
@@ -606,7 +606,7 @@
 		display: grid;
 		align-items: center;
 		display: flex;
-		padding: 0.5rem;
+		padding: calc(var(--icon-size) * 0.2);
 		background-position: center center;
 		background-size: cover;
 		background-repeat: no-repeat;
