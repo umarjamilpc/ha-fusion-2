@@ -322,6 +322,20 @@
 			>
 		</div>
 
+		<h2>{$lang('icon_size')}</h2>
+		<div class="icon-gallery-container">
+			<input
+				name={$lang('icon_size')}
+				class="input"
+				type="text"
+				placeholder="2.4rem"
+				autocomplete="off"
+				spellcheck="false"
+				value={sel?.icon_size}
+				on:change={(event) => set('icon_size', event)}
+			/>
+		</div>
+
 		<h2>{$lang('color')}</h2>
 
 		<div class="icon-gallery-container">

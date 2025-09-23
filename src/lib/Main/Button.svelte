@@ -487,6 +487,7 @@
 			class="icon"
 			data-state={stateOn}
 			style:--icon-color={iconColor}
+			style:--icon-size={sel?.icon_size || '2.4rem'}
 			style:background-color={sel?.template?.color && template?.color?.output
 				? template?.color?.output
 				: undefined}
