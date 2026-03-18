@@ -1,0 +1,29 @@
+# HA-Fusion — build locally or pull a pre-built image
+#
+# Build & run:
+#   docker compose up -d --build
+#
+# Env:
+#   HASS_URL  — Home Assistant URL (e.g. http://homeassistant:8123 in Docker network)
+#   PORT      — listen port (default 5050)
+#   ADDON     — set true when running as HA add-on (ingress proxy)
+
+services:
+  ha-fusion:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${HA_FUSION_IMAGE:-ha-fusion:local}
+    container_name: ${HA_FUSION_CONTAINER:-ha-fusion}
+    restart: unless-stopped
+    ports:
+      - "${HA_FUSION_PORT:-5050}:5050"
+    environment:
+      TZ: ${TZ:-UTC}
+      # Home Assistant URL reachable from this container (use host IP or service name)
+      HASS_URL: ${HASS_URL:-http://192.168.1.1:8123}
+      PORT: "5050"
+      ADDON: ${ADDON:-false}
+    volumes:
+      # Persist dashboard config / data (matches ha-fusion data dir)
+      - ${HA_FUSION_DATA:-./data}:/app/data
