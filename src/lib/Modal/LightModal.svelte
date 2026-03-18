@@ -15,7 +15,9 @@
 	export let sel: any;
 
 	let debounce = false;
-	let timeout: ReturnType<typeof setTimeout>;
+	/** Placeholder so first clearTimeout in LightSlider is safe */
+	let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {}, 0);
+	clearTimeout(timeout);
 	let rangeValue = 0;
 
 	let groupSel: string | undefined;

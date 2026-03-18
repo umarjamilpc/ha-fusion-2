@@ -34,6 +34,7 @@
 	let Timer: ComponentType;
 	let Weather: ComponentType;
 	let WeatherForecast: ComponentType;
+	let ContextHero: ComponentType;
 
 	const imports = {
 		bar: () => import('$lib/Sidebar/Bar.svelte').then((c) => (Bar = c.default)),
@@ -55,7 +56,9 @@
 		timer: () => import('$lib/Sidebar/Timer.svelte').then((c) => (Timer = c.default)),
 		weather: () => import('$lib/Sidebar/Weather.svelte').then((c) => (Weather = c.default)),
 		weather_forecast: () =>
-			import('$lib/Sidebar/WeatherForecast.svelte').then((c) => (WeatherForecast = c.default))
+			import('$lib/Sidebar/WeatherForecast.svelte').then((c) => (WeatherForecast = c.default)),
+		context_hero: () =>
+			import('$lib/Sidebar/ContextHero.svelte').then((c) => (ContextHero = c.default))
 	};
 
 	$: if ($dashboard?.sidebar) importComponents();
@@ -127,6 +130,8 @@
 				openModal(() => import('$lib/Modal/TemplateConfig.svelte'), { sel });
 			} else if (sel?.type === 'time') {
 				openModal(() => import('$lib/Modal/TimeConfig.svelte'), { sel });
+			} else if (sel?.type === 'context_hero') {
+				openModal(() => import('$lib/Modal/ContextHeroConfig.svelte'), { sel });
 			} else if (sel?.type === 'timer') {
 				openModal(() => import('$lib/Modal/TimerConfig.svelte'), { sel });
 			} else if (sel?.type === 'weather') {
@@ -257,6 +262,7 @@
 					item?.type === 'date' ||
 					item?.type === 'camera' ||
 					item?.type === 'time' ||
+					item?.type === 'context_hero' ||
 					item?.type === 'notifications' ||
 					item?.type === 'configure'
 						? 'flex'
@@ -397,6 +403,12 @@
 								hour12={item?.hour12 || false}
 							/>
 						</button>
+
+						<!-- CONTEXT HERO (hass-config style) -->
+					{:else if ContextHero && item?.type === 'context_hero' && !hide_mobile}
+						<div on:click={() => handleClick(item?.id)} on:keydown role="button" tabindex="0">
+							<svelte:component this={ContextHero} sel={item} />
+						</div>
 
 						<!-- TIMER -->
 					{:else if Timer && item?.type === 'timer' && !hide_mobile}

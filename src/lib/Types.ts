@@ -28,6 +28,22 @@ export interface DashboardUi {
 	horizontal_stack_gap?: string;
 	card_radius?: string;
 	main_padding_x?: string;
+	/** hass-config tablet–style cards (solid grays, accent) */
+	design_preset?: '' | 'glass' | 'hass_tablet';
+}
+
+/** Bottom dock (NAS, History, …) — hass-config footer style */
+export interface FooterDockItem {
+	label: string;
+	icon?: string;
+	url?: string;
+	/** Switch to view by name (case-insensitive partial match) */
+	view?: string;
+	badge_entity?: string;
+}
+
+export interface DashboardFooter {
+	items?: FooterDockItem[];
 }
 
 export interface Dashboard {
@@ -38,6 +54,7 @@ export interface Dashboard {
 	hide_sidebar?: boolean;
 	sidebarWidth?: number;
 	ui?: DashboardUi;
+	footer?: DashboardFooter;
 }
 
 export interface Views {
@@ -151,7 +168,8 @@ export type SidebarItem = BarItem &
 	TimeItem &
 	WeatherItem &
 	WeatherForecastItem &
-	DividerItem;
+	DividerItem &
+	ContextHeroItem;
 
 export interface BarItem {
 	type?: string;
@@ -253,6 +271,17 @@ export interface TemplateItem {
 	id?: number;
 	template?: string;
 	hide_mobile?: boolean;
+}
+
+export interface ContextHeroItem {
+	type?: string;
+	id?: number;
+	hour12?: boolean;
+	seconds?: boolean;
+	hide_mobile?: boolean;
+	/** Entity IDs to summarize when “on” (lights, switches, etc.) */
+	summary_entities?: string[];
+	weather_entity?: string;
 }
 
 export interface TimeItem {

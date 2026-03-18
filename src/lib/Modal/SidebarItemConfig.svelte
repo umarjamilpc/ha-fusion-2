@@ -32,6 +32,7 @@
 	import Graph from '$lib/Sidebar/Graph.svelte';
 	import Template from '$lib/Sidebar/Template.svelte';
 	import Timer from '$lib/Sidebar/Timer.svelte';
+	import ContextHero from '$lib/Sidebar/ContextHero.svelte';
 	import ConfigButtons from '$lib/Modal/ConfigButtons.svelte';
 	import Radial from '$lib/Sidebar/Radial.svelte';
 	import Notifications from '$lib/Sidebar/Notifications.svelte';
@@ -237,6 +238,15 @@
 					entity_id: $demo.timer
 				}
 			}
+		},
+		{
+			id: 'context_hero',
+			type: $lang('context_hero'),
+			component: ContextHero,
+			props: {
+				sel: { ...sel, type: 'context_hero', hour12: true },
+				demo: true
+			}
 		}
 	];
 
@@ -253,6 +263,10 @@
 		switch (sel?.type) {
 			case 'time':
 				openModal(() => import('$lib/Modal/TimeConfig.svelte'), { sel });
+				break;
+
+			case 'context_hero':
+				openModal(() => import('$lib/Modal/ContextHeroConfig.svelte'), { sel });
 				break;
 
 			case 'date':

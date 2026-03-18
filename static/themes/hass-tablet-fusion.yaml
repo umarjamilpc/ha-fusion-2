@@ -1,0 +1,21 @@
+# Inspired by matt8707/hass-config themes/tablet.yaml — use as HA-Fusion theme
+# Select "hass-tablet-fusion" in Appearance after adding to server themes folder, or merge vars into your theme.
+title: hass-tablet-fusion
+author: hass-config inspired
+app-color: '#222627'
+font-family: 'Inter Variable', 'SF Pro Text', Roboto, system-ui, sans-serif
+sizes-sidebar-time: clamp(2.25rem, 4.2vw, 3.75rem)
+sidebar-padding: 0.85rem 1rem 1rem 1.1rem
+sidebar-font-size: 0.92rem
+colors-sidebar-background: rgba(0, 0, 0, 0.14)
+colors-sidebar-border: 1px solid rgba(58, 69, 73, 0.22)
+colors-background: linear-gradient(165deg, #141617 0%, #1a1d1f 45%, #121415 100%)
+colors-text: rgba(255, 255, 255, 0.92)
+colors-title: rgba(255, 255, 255, 0.82)
+button-background-color-off: rgba(34, 38, 39, 0.88)
+button-background-color-on: rgba(52, 57, 58, 0.95)
+button-name-color-off: rgba(255, 255, 255, 0.88)
+button-name-color-on: rgba(255, 255, 255, 0.96)
+button-state-color-off: rgba(200, 205, 208, 0.65)
+button-state-color-on: rgba(200, 218, 222, 0.85)
+drawer-font-size: 0.95rem

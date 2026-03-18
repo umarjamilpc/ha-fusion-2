@@ -200,6 +200,8 @@
 	}
 
 	$: hasSidebar = Boolean($dashboard?.sidebar?.length && !$dashboard?.hide_sidebar);
+	$: hasFooterDock = Boolean(($dashboard?.footer?.items || []).length);
+	$: hassTabletPreset = $dashboard?.ui?.design_preset === 'hass_tablet';
 	$: sidebarPx =
 		!hasSidebar || $layoutBreakpoint === 'narrow'
 			? 0
@@ -217,8 +219,16 @@
 	id="layout"
 	class:layout-narrow={$layoutBreakpoint === 'narrow'}
 	class:layout-mid={$layoutBreakpoint === 'mid'}
+	class:design-hass-tablet={hassTabletPreset}
+	class:has-footer-dock={hasFooterDock}
 	style:grid-template-columns="{sidebarPx}px minmax(0, 1fr)"
-	style:grid-template-rows={$showDrawer ? 'auto auto 1fr' : '0fr auto 1fr'}
+	style:grid-template-rows={$showDrawer
+		? hasFooterDock
+			? 'auto auto 1fr auto'
+			: 'auto auto 1fr'
+		: hasFooterDock
+			? '0fr auto 1fr auto'
+			: '0fr auto 1fr'}
 	style:transition="grid-template-rows {$motion}ms ease, grid-template-columns {$motion}ms ease"
 >
 	<!-- nav -->
@@ -262,9 +272,15 @@
 			<svelte:component this={CustomJs.default} />
 		{/await}
 	{/if}
+
+	{#await import('$lib/Main/FooterDock.svelte') then FooterDock}
+		<svelte:component this={FooterDock.default} />
+	{/await}
 </div>
 
 <style>
+	@import '$lib/styles/hass-tablet-preset.css';
+
 	/* Desktop & tablet: sidebar + main (hass-config style) */
 	#layout {
 		display: grid;
@@ -274,6 +290,14 @@
 			'aside main';
 		min-height: 100vh;
 		overflow: hidden;
+	}
+
+	#layout.has-footer-dock {
+		grid-template-areas:
+			'header header'
+			'aside nav'
+			'aside main'
+			'dock dock';
 	}
 
 	/* Tablet: slightly tighter chrome */
@@ -290,6 +314,15 @@
 		grid-template-columns: minmax(0, 1fr) !important;
 		grid-template-rows: auto auto 1fr !important;
 		padding-bottom: env(safe-area-inset-bottom, 0);
+	}
+
+	#layout.layout-narrow.has-footer-dock {
+		grid-template-areas:
+			'header header'
+			'nav nav'
+			'main main'
+			'dock dock';
+		grid-template-rows: auto auto 1fr auto !important;
 	}
 
 	#layout.layout-narrow :global(aside) {

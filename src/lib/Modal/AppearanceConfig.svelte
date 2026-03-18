@@ -74,6 +74,16 @@
 		$dashboard = $dashboard;
 	}
 
+	function setDesignPreset(p: '' | 'hass_tablet') {
+		touchUi();
+		const u = $dashboard.ui as DashboardUi;
+		if (p) u.design_preset = p;
+		else delete u.design_preset;
+		if (Object.keys(u).length === 0) delete $dashboard.ui;
+		$dashboard = $dashboard;
+		$record();
+	}
+
 	let mounted = false;
 	let gallery: HTMLDivElement;
 	let buttons: { [key: number]: HTMLButtonElement } = {};
@@ -210,6 +220,34 @@
 				{/if}
 			</div>
 		{/if}
+
+		<h2 style:margin-top="1.5rem">{$lang('design_preset')}</h2>
+		<p class="hint">
+			Tablet (hass-config) uses solid gray cards and tighter section titles like
+			<a
+				href="https://github.com/matt8707/hass-config"
+				target="_blank"
+				rel="noopener noreferrer">matt8707/hass-config</a
+			>. Pair with theme <code>hass-tablet-fusion</code> in <code>static/themes/</code>.
+		</p>
+		<div class="button-container preset-row">
+			<button
+				type="button"
+				class:selected={$dashboard.ui?.design_preset !== 'hass_tablet'}
+				on:click={() => setDesignPreset('')}
+				use:Ripple={$ripple}
+			>
+				{$lang('design_preset_glass')}
+			</button>
+			<button
+				type="button"
+				class:selected={$dashboard.ui?.design_preset === 'hass_tablet'}
+				on:click={() => setDesignPreset('hass_tablet')}
+				use:Ripple={$ripple}
+			>
+				{$lang('design_preset_hass')}
+			</button>
+		</div>
 
 		<h1 style:margin-top="1.9rem">Grid & layout</h1>
 		<p class="hint">
