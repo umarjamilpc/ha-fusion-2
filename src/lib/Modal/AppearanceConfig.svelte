@@ -7,6 +7,7 @@
 	import ConfigButtons from '$lib/Modal/ConfigButtons.svelte';
 	import Modal from '$lib/Modal/Index.svelte';
 	import Ripple from 'svelte-ripple';
+	import type { DashboardUi } from '$lib/Types';
 
 	export let isOpen: boolean;
 	export let highlight = false;
@@ -52,6 +53,25 @@
 	function handleSidebar(state: boolean) {
 		$dashboard.hide_sidebar = state;
 		$record();
+	}
+
+	function touchUi() {
+		if (!$dashboard.ui) $dashboard.ui = {};
+		$dashboard = $dashboard;
+	}
+
+	function recordUi() {
+		touchUi();
+		$record();
+	}
+
+	function setUiField(key: keyof DashboardUi, raw: string) {
+		touchUi();
+		const u = $dashboard.ui as DashboardUi;
+		const v = raw.trim();
+		if (v) (u as Record<string, string>)[key as string] = v;
+		else delete (u as Record<string, string>)[key as string];
+		$dashboard = $dashboard;
 	}
 
 	let mounted = false;
@@ -191,6 +211,102 @@
 			</div>
 		{/if}
 
+		<h1 style:margin-top="1.9rem">Grid & layout</h1>
+		<p class="hint">
+			Adjust grid density and defaults. Edit mode: drag the yellow corner on any button to resize it.
+			Save dashboard to persist.
+		</p>
+
+		<div class="layout-grid">
+			<label class="field">
+				<span>Default button width</span>
+				<input
+					type="text"
+					class="input"
+					placeholder="14.5rem"
+					value={$dashboard.ui?.default_button_width ?? ''}
+					on:input={(e) => setUiField('default_button_width', e.currentTarget.value)}
+					on:blur={recordUi}
+				/>
+			</label>
+			<label class="field">
+				<span>Button grid gap</span>
+				<input
+					type="text"
+					class="input"
+					placeholder="0.65rem"
+					value={$dashboard.ui?.grid_gap ?? ''}
+					on:input={(e) => setUiField('grid_gap', e.currentTarget.value)}
+					on:blur={recordUi}
+				/>
+			</label>
+			<label class="field">
+				<span>Section spacing</span>
+				<input
+					type="text"
+					class="input"
+					placeholder="1.5rem"
+					value={$dashboard.ui?.section_gap ?? ''}
+					on:input={(e) => setUiField('section_gap', e.currentTarget.value)}
+					on:blur={recordUi}
+				/>
+			</label>
+			<label class="field">
+				<span>Column gap (horizontal stacks)</span>
+				<input
+					type="text"
+					class="input"
+					placeholder="2rem"
+					value={$dashboard.ui?.horizontal_stack_gap ?? ''}
+					on:input={(e) => setUiField('horizontal_stack_gap', e.currentTarget.value)}
+					on:blur={recordUi}
+				/>
+			</label>
+			<label class="field">
+				<span>Card corner radius</span>
+				<input
+					type="text"
+					class="input"
+					placeholder="0.65rem"
+					value={$dashboard.ui?.card_radius ?? ''}
+					on:input={(e) => setUiField('card_radius', e.currentTarget.value)}
+					on:blur={recordUi}
+				/>
+			</label>
+			<label class="field">
+				<span>Main area side padding</span>
+				<input
+					type="text"
+					class="input"
+					placeholder="2rem"
+					value={$dashboard.ui?.main_padding_x ?? ''}
+					on:input={(e) => setUiField('main_padding_x', e.currentTarget.value)}
+					on:blur={recordUi}
+				/>
+			</label>
+		</div>
+
+		<button
+			type="button"
+			class="reset-layout"
+			use:Ripple={$ripple}
+			on:click={() => {
+				const u = $dashboard.ui;
+				if (!u) return;
+				delete u.default_button_width;
+				delete u.grid_gap;
+				delete u.section_gap;
+				delete u.horizontal_stack_gap;
+				delete u.card_radius;
+				delete u.main_padding_x;
+				if (Object.keys(u).length === 0) delete $dashboard.ui;
+				$dashboard = $dashboard;
+				$record();
+			}}
+		>
+			Reset layout overrides
+		</button>
+
 		<ConfigButtons />
 	</Modal>
 {/if}
@@ -318,5 +434,51 @@
 
 	h1 {
 		margin: 0.35em 0 0.15em 0;
+	}
+
+	.hint {
+		opacity: 0.75;
+		font-size: 0.88rem;
+		line-height: 1.45;
+		margin: 0 0 1rem 0;
+		max-width: 36rem;
+	}
+
+	.layout-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+		gap: 1rem 1.25rem;
+		margin-bottom: 1.25rem;
+	}
+
+	.field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		font-size: 0.88rem;
+	}
+
+	.field span {
+		opacity: 0.85;
+	}
+
+	.input {
+		padding: 0.55rem 0.65rem;
+		border-radius: 0.45rem;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		background: rgba(0, 0, 0, 0.25);
+		color: inherit;
+		font-size: 0.9rem;
+	}
+
+	.reset-layout {
+		margin-bottom: 1rem;
+		padding: 0.5rem 0.9rem;
+		border-radius: 0.45rem;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		background: rgba(255, 255, 255, 0.06);
+		color: inherit;
+		cursor: pointer;
+		font-size: 0.88rem;
 	}
 </style>

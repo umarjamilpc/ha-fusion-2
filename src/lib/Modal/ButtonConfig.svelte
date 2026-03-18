@@ -411,6 +411,80 @@
 			</div>
 		{/if}
 
+		<h2>Size & layout</h2>
+		<p class="layout-hint">
+			Optional CSS sizes. Square tile = large centered icon. Resize in edit mode via the yellow
+			corner handle.
+		</p>
+		<div class="layout-row">
+			<input
+				name="width"
+				class="input layout-input"
+				type="text"
+				placeholder="Width (e.g. 200px)"
+				value={sel?.width ?? ''}
+				autocomplete="off"
+				on:input={(e) => {
+					const v = e.currentTarget.value.trim();
+					if (v) sel.width = v;
+					else delete sel.width;
+					$dashboard = $dashboard;
+				}}
+			/>
+			<input
+				name="height"
+				class="input layout-input"
+				type="text"
+				placeholder="Height (e.g. 200px)"
+				value={sel?.height ?? ''}
+				autocomplete="off"
+				on:input={(e) => {
+					const v = e.currentTarget.value.trim();
+					if (v) sel.height = v;
+					else delete sel.height;
+					$dashboard = $dashboard;
+				}}
+			/>
+		</div>
+		<div class="layout-row">
+			<input
+				name="icon_size"
+				class="input layout-input full"
+				type="text"
+				placeholder="Icon size (e.g. 5em, 3rem)"
+				value={sel?.icon_size ?? ''}
+				autocomplete="off"
+				on:input={(e) => {
+					const v = e.currentTarget.value.trim();
+					if (v) sel.icon_size = v;
+					else delete sel.icon_size;
+					$dashboard = $dashboard;
+				}}
+			/>
+		</div>
+		<div class="button-container">
+			<button
+				class:selected={sel?.shape !== 'square'}
+				on:click={() => {
+					delete sel.shape;
+					$dashboard = $dashboard;
+				}}
+				use:Ripple={$ripple}
+			>
+				Row card
+			</button>
+			<button
+				class:selected={sel?.shape === 'square'}
+				on:click={() => {
+					sel.shape = 'square';
+					$dashboard = $dashboard;
+				}}
+				use:Ripple={$ripple}
+			>
+				Square tile
+			</button>
+		</div>
+
 		<ConfigButtons {sel} />
 	</Modal>
 {/if}
@@ -450,5 +524,29 @@
 	.full-width {
 		width: -webkit-fill-available;
 		width: -moz-available;
+	}
+
+	.layout-hint {
+		font-size: 0.85rem;
+		opacity: 0.72;
+		margin: 0 0 0.75rem 0;
+		line-height: 1.4;
+	}
+
+	.layout-row {
+		display: flex;
+		gap: 0.65rem;
+		margin-bottom: 0.65rem;
+		flex-wrap: wrap;
+	}
+
+	.layout-input {
+		flex: 1;
+		min-width: 8rem;
+	}
+
+	.layout-input.full {
+		flex: 1 1 100%;
+		min-width: 100%;
 	}
 </style>

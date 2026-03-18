@@ -99,9 +99,13 @@
 {:else if state && isTimestamp(state)}
 	{relativeTime(state, $selectedLanguage)}
 
-	<!-- Percentage  -->
-{:else if state === 'on' && percentage}
-	{Intl.NumberFormat($selectedLanguage, { style: 'percent' }).format(percentage * 0.01)}
+	<!-- Fan / percent (HA uses 0–100 for fan.percentage) -->
+{:else if getDomain(entity_id) === 'fan' && state === 'on' && percentage != null && percentage !== ''}
+	{Number(percentage)}%
+
+	<!-- Other on + percentage (0–100) -->
+{:else if state === 'on' && percentage != null && percentage !== ''}
+	{Intl.NumberFormat($selectedLanguage, { style: 'percent' }).format(Number(percentage) * 0.01)}
 
 	<!-- State  -->
 {:else if state}

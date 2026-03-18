@@ -1,0 +1,998 @@
+views:
+  - name: SECURITY
+    id: 1849167470356
+    sections:
+      - type: horizontal-stack
+        sections:
+          - name: Section
+            items:
+              - id: 7210439451291
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b2
+                height: 100px
+                more_info: false
+                icon_size: 5em
+                width: ''
+              - id: 8254626486541
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b2
+                icon_size: 4em
+                height: 200px
+                width: 200px
+                more_info: false
+                shape: square
+            id: 334805686406
+          - name: Section
+            items:
+              - id: 6684736481435
+                type: camera
+                entity_id: camera.garage_door_ring_doorbell_snapshot
+                size: contain
+            id: 2728224319270
+        id: 2741989780904
+  - name: UMAR-BEDROOM
+    id: 4565016680764
+    sections:
+      - type: scenes
+        name: Scenes
+        items:
+          - id: 6050920945777
+            type: button
+            entity_id: scene.umar_bedroom_scene_bright
+            name: BRIGHT
+          - id: 5549881748806
+            type: button
+            entity_id: scene.umar_bedroom_scene_sleep
+            name: SLEEP
+        id: 6996782188042
+      - type: horizontal-stack
+        sections:
+          - name: LIGHTS
+            items:
+              - id: 8778646101032
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b2
+                name: TUBE-LIGHT
+                more_info: false
+                icon: ''
+                height: ''
+                icon_size: ''
+                width: ''
+            id: 9497608763446
+          - name: LIFX-LIGHT
+            items:
+              - type: button
+                id: 5614949969705
+                entity_id: switch.umar_bedroom_8gang_switch_1_b6
+                more_info: false
+              - id: 6057971281054
+                type: button
+                entity_id: light.umar_bedroom_lifx_bulb_1
+                name: ''
+            id: 2980481760614
+        id: 7347678870561
+      - type: horizontal-stack
+        sections:
+          - name: FAN
+            items:
+              - id: 4888251167786
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b5
+                name: ''
+                more_info: false
+                icon: ph:fan-fill
+              - id: 1931768957947
+                type: button
+                entity_id: fan.umar_bedroom_fan_1_slave_switch
+                name: ''
+              - id: 1579700552855
+                type: button
+                entity_id: select.umar_bedroom_fan_1_mode
+                name: ''
+                template:
+                  service: |-
+                    service: fan.increase_speed
+                    data: {}
+            id: 6651944622783
+          - name: HVAC
+            items:
+              - id: 1108223934921
+                type: button
+                entity_id: climate.umar_bedroom_ac
+                name: HVAC
+              - id: 7685772028246
+                type: button
+                entity_id: sensor.umar_bedroom_dht11_temperature
+                name: TEMPERATURE
+                more_info: false
+                color: '#ffffff'
+              - id: 8921303175424
+                type: button
+                entity_id: sensor.umar_bedroom_dht11_humidity
+                more_info: false
+                name: HUMIDITY
+            id: 4355447832582
+        id: 9662011421880
+      - type: horizontal-stack
+        sections:
+          - name: DOWN-LIGHTS
+            items:
+              - id: 1238751529627
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b3
+                name: ''
+                more_info: false
+                icon: mdi:downlight
+                width: 200px
+                height: 200px
+                icon_size: 10em
+                shape: square
+              - id: 1473379016676
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b4
+                name: ''
+                more_info: false
+                icon: mdi:downlight
+                width: 200px
+                height: 200px
+                icon_size: 10em
+                shape: square
+              - id: 7309016677934
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b7
+                name: ''
+                more_info: false
+                icon: mdi:downlight
+                width: 200px
+                height: 200px
+                icon_size: 10em
+                shape: square
+              - id: 6518586881137
+                type: button
+                entity_id: switch.umar_bedroom_8gang_switch_1_b8
+                name: ''
+                more_info: false
+                icon: mdi:downlight
+                shape: square
+                icon_size: 10em
+                width: 200px
+                height: 200px
+            id: 2886667482377
+          - name: BATHROOM-LIGHTS
+            items:
+              - id: 2417077886751
+                type: button
+                entity_id: binary_sensor.umar_bathroom_hps_1_motion
+                more_info: false
+                template:
+                  state: |-
+                    {% if is_state(entity_id, "on") %}
+                      DETECTED
+                    {% else %}
+                      NONE
+                    {% endif %}
+              - id: 7527020053084
+                type: button
+                entity_id: switch.umar_bathroom_1gang_switch_1_b1
+                more_info: false
+                name: ''
+                icon: mdi:lightbulb
+            id: 6908637791376
+        id: 7121903918065
+      - type: horizontal-stack
+        sections:
+          - name: MEDIA
+            items:
+              - type: button
+                id: 7245141831594
+                entity_id: media_player.denon_avr_x1200w
+              - id: 9046483652148
+                type: button
+                entity_id: media_player.umar_bedroom_tv
+              - id: 5114177507304
+                type: button
+                entity_id: script.umar_bedroom_tv_youtube
+                icon: logos:youtube-icon
+                more_info: false
+                name: TV-YOUTUBE
+            id: 4867028358351
+          - name: EXTRA-SWITCH
+            items:
+              - type: button
+                id: 7483466319605
+                entity_id: switch.umar_bedroom_8gang_switch_1_b1
+                name: ''
+                more_info: false
+            id: 9616493240617
+        id: 9635535411436
+  - name: MASTER-BEDROOM
+    id: 3683181821078
+    sections:
+      - type: horizontal-stack
+        sections:
+          - name: LIGHTS
+            items:
+              - id: 5407834241382
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b4
+                more_info: false
+                name: ''
+              - id: 3424020811208
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b8
+                more_info: false
+                name: ''
+            id: 8019771594310
+          - name: LIFX-LIGHT
+            items:
+              - id: 4509028506931
+                type: button
+                entity_id: switch.master_bathroom_4gang_switch_1_b3
+                name: ''
+                more_info: false
+              - id: 4458325868098
+                type: button
+                entity_id: light.master_bedroom_lifx_bulb_1
+            id: 7312093407937
+        id: 6600774773475
+      - type: horizontal-stack
+        sections:
+          - name: FAN
+            items:
+              - id: 1089482274815
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b3
+                more_info: false
+                name: ''
+              - id: 2789885141749
+                type: button
+                entity_id: fan.master_bedroom_fan_1_slave_switch
+                name: ''
+              - id: 1327588601867
+                type: button
+                entity_id: select.master_bedroom_fan_1_mode
+                name: ''
+            id: 5421345721787
+          - name: HVAC
+            items:
+              - id: 7199467632484
+                type: button
+                entity_id: climate.master_bedroom_ac_esp
+                name: HVAC
+              - id: 8465995587356
+                type: button
+                entity_id: switch.master_bedroom_ac_esp_display
+                more_info: false
+                name: DISPLAY
+              - id: 1883652609939
+                type: button
+                entity_id: sensor.master_bedroom_ac_esp_temperature
+                more_info: false
+                name: TEMPERATURE
+            id: 8947498884605
+        id: 3569961022273
+      - type: horizontal-stack
+        sections:
+          - name: BATHROOM-LIGHTS
+            items:
+              - id: 3759794593726
+                type: button
+                entity_id: switch.master_bathroom_4gang_switch_1_b1
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 7437748189532
+                type: button
+                entity_id: switch.master_bathroom_4gang_switch_1_b2
+                more_info: false
+                name: ''
+                icon: ''
+            id: 9950490898238
+          - name: BATHROOM-MOTION
+            items:
+              - id: 1993483378489
+                type: button
+                entity_id: binary_sensor.master_bathroom_hps_1_motion
+                more_info: false
+                template:
+                  state: |-
+                    {% if is_state(entity_id, "on") %}
+                      DETECTED
+                    {% else %}
+                      NONE
+                    {% endif %}
+                name: MOTION
+              - id: 3964314701753
+                type: button
+                entity_id: sensor.master_bathroom_hps_1_illuminance
+                more_info: false
+                name: ILLUMINANCE
+            id: 9188679793956
+        id: 6818586500879
+      - type: horizontal-stack
+        sections:
+          - name: EXTRA-SWITCH
+            items:
+              - id: 3634947466772
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b1
+                more_info: false
+              - id: 9327996993635
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b2
+                more_info: false
+              - id: 2392194444932
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b5
+                more_info: false
+              - id: 6710976007250
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b6
+                more_info: false
+              - id: 7348082111052
+                type: button
+                entity_id: switch.master_bedroom_8gang_switch_1_b7
+                more_info: false
+            id: 5567114658461
+        id: 7128788745044
+  - name: MENO-BEDROOM
+    id: 5830147884320
+    sections:
+      - type: horizontal-stack
+        sections:
+          - name: LIGHTS
+            items:
+              - id: 4447172886463
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b3
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 2164837676457
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b4
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 2693199174905
+                type: button
+                entity_id: switch.meno_bathroom_4gang_switch_1_b2
+                more_info: false
+                name: ''
+                icon: ''
+            id: 3762618774251
+        id: 4537234215975
+      - type: horizontal-stack
+        sections:
+          - name: FAN
+            items:
+              - id: 2726973134750
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b8
+                more_info: false
+                icon: ''
+                name: ''
+              - id: 2929596901706
+                type: button
+                entity_id: fan.meno_bedroom_fan_1_slave_switch
+                name: ''
+              - id: 2544301303643
+                type: button
+                entity_id: select.meno_bedroom_fan_1_mode
+                name: ''
+            id: 7988918733879
+        id: 7858062152935
+      - type: horizontal-stack
+        sections:
+          - name: BATHROOM-LIGHTS
+            items:
+              - id: 9581388217185
+                type: button
+                entity_id: switch.meno_bathroom_4gang_switch_1_b3
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 7369037679435
+                type: button
+                entity_id: switch.meno_bathroom_4gang_switch_1_b4
+                more_info: false
+                name: ''
+                icon: ''
+            id: 6900801158565
+          - name: BATHROOM-MOTION
+            items:
+              - id: 5552615291372
+                type: button
+                entity_id: binary_sensor.meno_bathroom_hps_1_motion
+                more_info: false
+                name: ''
+                template:
+                  state: |-
+                    {% if is_state(entity_id, "on") %}
+                      DETECTED
+                    {% else %}
+                      NONE
+                    {% endif %}
+              - id: 5739399641912
+                type: button
+                entity_id: sensor.meno_bathroom_hps_1_illuminance
+                more_info: false
+                name: ''
+            id: 3376116322165
+        id: 7287559579366
+      - type: horizontal-stack
+        sections:
+          - name: EXTRA-SWITCH
+            items:
+              - id: 2554555992727
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b1
+                more_info: false
+              - id: 6976055425882
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b2
+                more_info: false
+              - id: 9580279952227
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b5
+                more_info: false
+              - id: 4710994033036
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b6
+                more_info: false
+              - id: 5112349981800
+                type: button
+                entity_id: switch.meno_bedroom_8gang_switch_1_b7
+                more_info: false
+              - id: 7668918823862
+                type: button
+                entity_id: switch.meno_bathroom_4gang_switch_1_b2
+                more_info: false
+            id: 7054665469252
+        id: 4883593998106
+  - name: LIVING-ROOM
+    id: 1351161650164
+    sections:
+      - type: horizontal-stack
+        sections:
+          - name: LIGHTS
+            items:
+              - id: 1291664753499
+                type: button
+                entity_id: switch.living_room_4gang_switch_2_b3
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 5197940595349
+                type: button
+                entity_id: switch.living_room_8gang_switch_1_b7
+                more_info: false
+                name: ''
+                icon: ''
+            id: 3961584592338
+          - name: MOTION
+            items:
+              - id: 7614422068439
+                type: button
+                entity_id: binary_sensor.living_room_hps_1_radar_target
+                more_info: false
+                name: ''
+                template:
+                  state: |-
+                    {% if is_state(entity_id, "on") %}
+                      DETECTED
+                    {% else %}
+                      NONE
+                    {% endif %}
+              - id: 6846145607747
+                type: button
+                entity_id: binary_sensor.hallway_hps_1_radar_target
+                more_info: false
+                name: ''
+                template:
+                  state: |-
+                    {% if is_state(entity_id, "on") %}
+                      DETECTED
+                    {% else %}
+                      NONE
+                    {% endif %}
+            id: 7600656898472
+          - name: FAN-1
+            items:
+              - id: 4855928088351
+                type: button
+                entity_id: switch.living_room_8gang_switch_1_b3
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 5611491710955
+                type: button
+                entity_id: fan.living_room_fan_1_slave_switch
+                name: ''
+              - id: 4863445015277
+                type: button
+                entity_id: select.living_room_fan_1_mode
+                name: ''
+            id: 3192171334632
+          - name: FAN-2
+            items:
+              - id: 7399066810697
+                type: button
+                entity_id: switch.living_room_4gang_switch_2_b2
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 8611087676629
+                type: button
+                entity_id: fan.living_room_fan_2_slave_switch
+                name: ''
+              - id: 7115126701599
+                type: button
+                entity_id: select.living_room_fan_2_mode
+                name: ''
+            id: 2210698801948
+        id: 6107273986743
+      - type: horizontal-stack
+        sections:
+          - name: DOWN-LIGHTS
+            items:
+              - id: 8458621931855
+                type: button
+                entity_id: switch.living_room_4gang_switch_1_b1
+                name: ''
+                more_info: false
+                icon: ''
+              - id: 5132648424341
+                type: button
+                entity_id: switch.living_room_4gang_switch_1_b2
+                name: ''
+                more_info: false
+                icon: ''
+              - id: 4208183575105
+                type: button
+                entity_id: switch.living_room_4gang_switch_1_b3
+                name: ''
+                more_info: false
+                icon: ''
+              - id: 9002883425071
+                type: button
+                entity_id: switch.living_room_4gang_switch_1_b4
+                name: ''
+                more_info: false
+                icon: ''
+            id: 3122866020486
+          - name: CHANDELIER
+            items:
+              - id: 2476641201439
+                type: button
+                entity_id: light.chandelier_main_light_1_all
+                name: ''
+                icon: ''
+              - id: 1904575012693
+                type: button
+                entity_id: light.chandelier_side_light_1_all
+                icon: ''
+              - id: 7981592934075
+                type: button
+                entity_id: light.chandelier_side_light_2_all
+                icon: ''
+            id: 1261246760502
+        id: 8945328417028
+      - type: horizontal-stack
+        sections:
+          - name: WATER-PUMPS
+            items:
+              - id: 7520439300800
+                type: button
+                entity_id: switch.living_room_8gang_switch_1_b5
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 8263946694215
+                type: button
+                entity_id: switch.living_room_8gang_switch_1_b6
+                more_info: false
+                name: ''
+                icon: ''
+            id: 1138141921230
+          - name: LIVING-ROOM-FIRE-TABLET
+            items:
+              - id: 4604857477613
+                type: button
+                entity_id: switch.living_room_8gang_switch_1_b4
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 8441218724574
+                type: button
+                entity_id: sensor.fire_tablet_battery
+                name: BATTERY
+                more_info: false
+            id: 1586722643104
+        id: 8462205653993
+      - type: horizontal-stack
+        sections:
+          - name: EXTRA-SWITCH
+            items:
+              - id: 5820747041761
+                type: button
+                entity_id: switch.living_room_8gang_switch_1_b1
+                more_info: false
+                name: ''
+              - id: 4609986228046
+                type: button
+                entity_id: switch.living_room_8gang_switch_1_b2
+                more_info: false
+                name: ''
+              - id: 9583738017348
+                type: button
+                entity_id: switch.living_room_4gang_switch_2_b1
+                more_info: false
+              - id: 6079500847766
+                type: button
+                entity_id: switch.living_room_4gang_switch_2_b4
+                more_info: false
+            id: 3213923871519
+        id: 4608809255937
+  - name: DINING-ROOM
+    id: 3065618569294
+    sections:
+      - type: horizontal-stack
+        sections:
+          - name: LIGHTS
+            items:
+              - id: 9920859381262
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b4
+                more_info: false
+                icon: ''
+                name: ''
+            id: 7242496980861
+          - name: FAN
+            items:
+              - id: 9211974698398
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b3
+                more_info: false
+                icon: ''
+                name: ''
+            id: 7362193004525
+          - name: MAIN-SWITCH
+            items:
+              - id: 5108664996119
+                type: button
+                entity_id: switch.dining_room_1gang_switch_1_b1
+                more_info: false
+                name: MAIN-SWITCH
+            id: 2515596676370
+        id: 9348992397853
+      - type: horizontal-stack
+        sections:
+          - name: DOWN-LIGHTS
+            items:
+              - id: 7921844444686
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b5
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 1421581588739
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b6
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 4684184498647
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b7
+                more_info: false
+                name: ''
+                icon: ''
+              - id: 9464510605007
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b8
+                more_info: false
+                name: ''
+                icon: ''
+            id: 4572416293169
+        id: 7471936214424
+      - type: horizontal-stack
+        sections:
+          - name: EXTRA-SWITCH
+            items:
+              - id: 2806029593932
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b1
+                more_info: false
+                icon: ''
+              - id: 7325875527748
+                type: button
+                entity_id: switch.dining_room_8gang_switch_1_b2
+                more_info: false
+                icon: ''
+            id: 7310871762540
+        id: 9414542053340
+  - name: DRAWING-ROOM
+    id: 9344924423379
+    sections:
+      - type: horizontal-stack
+        sections:
+          - name: WATER-PUMPS
+            items:
+              - id: 1891189215936
+                type: button
+                entity_id: switch.drawing_room_water_roof_pump_auto_1_b1
+                more_info: false
+                state: ''
+                icon: material-symbols:water-pump-outline
+                name: ROOF-PUMP-AUTO
+              - id: 3733775533141
+                type: button
+                entity_id: switch.drawing_room_water_roof_pump_1_b1
+                more_info: false
+                icon: material-symbols:water-pump-outline
+                name: ROOF-PUMP
+              - id: 5368925399895
+                type: button
+                entity_id: switch.drawing_room_water_main_pump_1_b1
+                more_info: false
+                icon: material-symbols:water-pump-outline
+                name: MAIN-PUMP
+            id: 7909031590931
+        id: 5259116906731
+      - type: horizontal-stack
+        sections:
+          - name: LIGHTS
+            items:
+              - id: 2989698523435
+                type: button
+                entity_id: switch.drawing_room_1gang_switch_1_b1
+                more_info: false
+                name: TUBE-LIGHT-1-NEW
+                icon: mdi:lightbulb-fluorescent-tube
+              - id: 7752068859515
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b3
+                more_info: false
+                icon: mdi:lightbulb-fluorescent-tube
+                name: TUBE-LIGHT-1
+            id: 9907481817891
+        id: 5011851471303
+      - type: horizontal-stack
+        sections:
+          - name: DOWN-LIGHTS
+            items:
+              - id: 6442054043604
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b5
+                more_info: false
+                name: LEFT-LIGHT
+                icon: mdi:downlight
+              - id: 3331281934875
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b6
+                more_info: false
+                name: BACK-LIGHT
+                icon: mdi:downlight
+              - id: 6095973177280
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b7
+                more_info: false
+                name: RIGHT-LIGHT
+                icon: mdi:downlight
+              - id: 8664898459014
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b8
+                more_info: false
+                name: FRONT-LIGHT
+                icon: mdi:downlight
+            id: 3004622417986
+        id: 9925690008793
+      - type: horizontal-stack
+        sections:
+          - name: EXTRA-SWITCH
+            items:
+              - id: 2467241339950
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b1
+                more_info: false
+                icon: ''
+              - id: 3501967566820
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b2
+                more_info: false
+                icon: ''
+              - id: 1068738476569
+                type: button
+                entity_id: switch.drawing_room_8gang_switch_1_b4
+                more_info: false
+                icon: ''
+            id: 7829882726017
+        id: 4064216737712
+  - name: STAIRWAY
+    id: 8542411129118
+    sections:
+      - type: horizontal-stack
+        sections:
+          - name: SOLAR-HYBRID
+            items:
+              - id: 4687396631599
+                type: button
+                entity_id: sensor.maxpower_sp_pv7000_pv_charging_power
+                name: PV-INPUT
+                more_info: false
+              - id: 5075583500476
+                type: button
+                entity_id: sensor.maxpower_sp_pv7000_ac_out_watt
+                name: AC-OUTPUT
+                more_info: false
+              - id: 8808526051136
+                type: button
+                entity_id: sensor.maxpower_sp_pv7000_pv_generation_day
+                name: PV-ENERGY-TODAY
+                more_info: false
+                template:
+                  state: >-
+                    {{ (states('sensor.maxpower_sp_pv7000_pv_generation_day') |
+                    float(0) / 1000) | round(2) }} kWh
+              - id: 1038925119147
+                type: button
+                entity_id: sensor.maxpower_sp_pv7000_pv_generation_month
+                template:
+                  state: >-
+                    {{ (states('sensor.maxpower_sp_pv7000_pv_generation_month')
+                    | float(0) / 1000) | round(2) }} kWh
+                name: PV-ENERGY-MONTH
+                more_info: false
+              - id: 9886209022594
+                type: button
+                entity_id: sensor.maxpower_sp_pv7000_inverter_bus_temperature
+                name: TEMPERATURE
+                more_info: false
+              - id: 5184984243437
+                type: button
+                entity_id: sensor.maxpower_sp_pv7000_ac_out_percent
+                more_info: false
+                name: INVERTER-CAPACITY
+              - id: 4578477838801
+                type: button
+                entity_id: sensor.maxpower_sp_pv7000_ac_in_voltage
+                name: AC-VOLTAGE
+                more_info: false
+            id: 1703019946572
+          - name: UPS
+            items:
+              - id: 9008549297334
+                type: button
+                entity_id: sensor.solarmax_r4_pv2000_ac_out_watt
+                more_info: false
+                name: AC-OUTPUT
+              - id: 9109145678243
+                type: button
+                entity_id: sensor.solarmax_r4_pv2000_inverter_bus_temperature
+                name: TEMPERATURE
+                more_info: false
+              - id: 4922873746212
+                type: button
+                entity_id: sensor.solarmax_r4_pv2000_battery_percent
+                name: BATTERY-PERCENT
+                more_info: false
+              - id: 6109114440819
+                type: button
+                entity_id: sensor.solarmax_r4_pv2000_ac_out_percent
+                name: INVERTER-CAPACITY
+                more_info: false
+              - id: 2851277063691
+                type: button
+                entity_id: sensor.solarmax_r4_pv2000_battery_load
+                name: BATTERY-LOAD
+                more_info: false
+              - id: 1197534890058
+                type: button
+                entity_id: sensor.solarmax_r4_pv2000_battery_voltage
+                name: BATTERY-VOLTAGE
+                more_info: false
+            id: 6894024732606
+        id: 1874360456142
+      - type: horizontal-stack
+        sections:
+          - name: GRID-VOLTAGE
+            items:
+              - id: 9278108221209
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_phase_a_voltage
+                more_info: false
+                name: PHASE A VOLTAGE
+              - id: 9048372489344
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_phase_b_voltage
+                more_info: false
+                name: PHASE B VOLTAGE
+              - id: 7543838139761
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_phase_c_voltage
+                more_info: false
+                name: PHASE C VOLTAGE
+            id: 3353777454146
+          - name: GRID-POWER
+            items:
+              - id: 9665286040049
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_phase_a_power
+                more_info: false
+                name: PHASE A POWER
+              - id: 2967184438743
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_phase_b_power
+                name: PHASE B POWER
+                more_info: false
+              - id: 2777863542236
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_phase_c_power
+                name: PHASE C POWER
+                more_info: false
+            id: 4893596968007
+          - name: GRID-PARAMETERS
+            items:
+              - id: 8301577840653
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_power_total
+                name: POWER TOTAL
+                more_info: false
+              - id: 1493123580514
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_power_factor
+                name: POWER FACTOR
+                more_info: false
+              - id: 5550949011545
+                type: button
+                entity_id: sensor.grid_main_energy_meter_1_temperature
+                name: TEMPERATURE
+                more_info: false
+            id: 8953148992762
+        id: 3077498820594
+sidebar:
+  - type: time
+    id: 9767922968284
+    hour12: true
+    seconds: true
+  - type: date
+    id: 6534948063570
+    hide: none
+    layout: horizontal
+    short_month: false
+    short_day: false
+  - id: 4513884008142
+    type: weather
+    entity_id: weather.forecast_home
+  - id: 4865119616273
+    type: weather_forecast
+    entity_id: weather.forecast_home
+    forecast_type: daily
+  - type: weatherforecast
+    id: 3808107809570
+    entity_id: weather.forecast_home
+    number_of_items: 5
+    icon_pack: meteocons
+  - id: 8874739672347
+    type: graph
+    entity_id: sensor.u_s_air_quality_index_2
+    period: 5minute
+    name: LAHORE-AIR-QUALITY-INDEX
+    stroke: 1
+  - id: 1179210635639
+    type: iframe
+    url: http://192.168.20.100:8123/energyflow-panel/0/default_view?kiosk
+    size: 580px
+theme: muted
+hide_views: false
+hide_sidebar: false
+sidebarWidth: 449
+# Optional UI tuning (also editable in Appearance → Grid & layout):
+# ui:
+#   default_button_width: 14.5rem
+#   grid_gap: 0.65rem
+#   section_gap: 1.5rem
+#   horizontal_stack_gap: 2rem
+#   card_radius: 0.65rem
+#   main_padding_x: 2rem

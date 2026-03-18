@@ -14,6 +14,8 @@
 	export let minHeight = '3.85rem';
 	/** Secondary line: temperature, fan %, etc. */
 	export let sublabel: string | undefined = undefined;
+	/** row = icon left + text; tile = stacked (square buttons, large icons) */
+	export let variant: 'row' | 'tile' = 'row';
 
 	let reduceMotion = false;
 	let mounted = false;
@@ -69,7 +71,9 @@
 	<div
 		class="dashboard-card-surface relative min-w-0 overflow-hidden rounded-glass border font-sans transition-[box-shadow,background-color,border-color] duration-glass ease-out"
 		class:dashboard-card-active={active}
+		class:h-full={variant === 'tile'}
 		style:min-height={minHeight}
+		style:height={variant === 'tile' ? '100%' : undefined}
 		style:--glow-r={glowRgb.r}
 		style:--glow-g={glowRgb.g}
 		style:--glow-b={glowRgb.b}
@@ -88,23 +92,43 @@
 			/>
 		{/if}
 
-		<div
-			class="relative z-[1] flex h-full min-h-[inherit] w-full items-center gap-3 px-3 py-2.5"
-		>
-			<div class="icon-slot flex shrink-0 items-center justify-center">
-				<slot name="icon" />
+		{#if variant === 'tile'}
+			<div
+				class="relative z-[1] flex h-full min-h-[inherit] w-full flex-col items-center justify-center gap-2 px-2 py-3 text-center"
+			>
+				<div class="icon-slot-tile flex shrink-0 items-center justify-center">
+					<slot name="icon" />
+				</div>
+				<div class="flex min-w-0 w-full flex-col items-center justify-center gap-0.5 overflow-hidden px-1">
+					<slot />
+					{#if sublabel}
+						<div
+							class="sublabel-slot text-[0.68rem] font-medium leading-tight tracking-wide text-white/45"
+						>
+							{sublabel}
+						</div>
+					{/if}
+				</div>
 			</div>
-			<div class="flex min-w-0 flex-1 flex-col justify-center gap-0.5 overflow-hidden">
-				<slot />
-				{#if sublabel}
-					<div
-						class="sublabel-slot text-[0.72rem] font-medium leading-tight tracking-wide text-white/45"
-					>
-						{sublabel}
-					</div>
-				{/if}
+		{:else}
+			<div
+				class="relative z-[1] flex h-full min-h-[inherit] w-full items-center gap-3 px-3 py-2.5"
+			>
+				<div class="icon-slot flex shrink-0 items-center justify-center">
+					<slot name="icon" />
+				</div>
+				<div class="flex min-w-0 flex-1 flex-col justify-center gap-0.5 overflow-hidden">
+					<slot />
+					{#if sublabel}
+						<div
+							class="sublabel-slot text-[0.72rem] font-medium leading-tight tracking-wide text-white/45"
+						>
+							{sublabel}
+						</div>
+					{/if}
+				</div>
 			</div>
-		</div>
+		{/if}
 	</div>
 </div>
 

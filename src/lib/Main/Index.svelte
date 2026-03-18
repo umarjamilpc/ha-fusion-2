@@ -7,6 +7,7 @@
 	import SectionHeader from '$lib/Main/SectionHeader.svelte';
 	import HorizontalStackHeader from '$lib/Main/HorizontalStackHeader.svelte';
 	import Scenes from '$lib/Main/Scenes.svelte';
+	import ItemResizeHandle from '$lib/Main/ItemResizeHandle.svelte';
 	import { handleVisibility, mediaQueries } from '$lib/Conditional';
 	import { generateId } from '$lib/Utils';
 
@@ -180,13 +181,31 @@
     `;
 	}
 
-	function itemStyles(type: string) {
+	function itemStyles(item: { type?: string; width?: string; height?: string }) {
+		const type = item?.type;
 		const large = ['conditional_media', 'picture_elements', 'camera'];
+		if (!type) return 'display: none;';
+		if (large.includes(type)) {
+			return `
+				flex: 1 1 min(100%, 29.5rem);
+				width: min(100%, 29.5rem);
+				max-width: 100%;
+				min-height: ${$itemHeight * 4}px;
+			`;
+		}
+		const w = type === 'button' && item?.width?.trim() ? item.width.trim() : null;
+		const defaultW = $dashboard?.ui?.default_button_width?.trim() || '14.5rem';
+		const basis = w || defaultW;
+		let h = '';
+		if (type === 'button' && item?.height?.trim() && /\d/.test(String(item.height))) {
+			h = `min-height: ${item.height.trim()};`;
+		}
 		return `
-			grid-column: ${large.includes(type) ? 'span 2' : 'span 1'};
-			grid-row: ${large.includes(type) ? 'span 4' : 'span 1'};
-			display: ${type ? '' : 'none'};
-    `;
+			flex: 0 0 ${basis};
+			width: ${basis};
+			max-width: 100%;
+			${h}
+		`;
 	}
 
 	/**
@@ -274,9 +293,16 @@
 		: typeof mounted === 'boolean' &&
 			typeof $mediaQueries === 'object' &&
 			handleVisibility($editMode, view?.sections, $states);
+
+	$: ui = $dashboard?.ui;
 </script>
 
 <main
+	style:--fusion-gap={ui?.grid_gap || '0.65rem'}
+	style:--fusion-section-gap={ui?.section_gap || '1.5rem'}
+	style:--fusion-stack-gap={ui?.horizontal_stack_gap || '2rem'}
+	style:--fusion-card-radius={ui?.card_radius || '0.65rem'}
+	style:--fusion-main-pad-x={ui?.main_padding_x || '2rem'}
 	style:transition="opacity {$motion}ms ease, outline-color {$motion}ms ease"
 	style:opacity={$editMode && view?.sections.length === 0 ? '0' : '1'}
 	use:dndzone={{ ...dndOptions, type: 'section', items: view.sections }}
@@ -337,9 +363,10 @@
 										class="item"
 										animate:flip={{ duration: $motion }}
 										tabindex="-1"
-										style={itemStyles(item?.type)}
+										style={itemStyles(item)}
 									>
 										<Content {item} sectionName={stackSection?.name} />
+										<ItemResizeHandle {item} />
 									</div>
 								{/each}
 							</div>
@@ -403,9 +430,10 @@
 							class="item"
 							animate:flip={{ duration: $motion }}
 							tabindex="-1"
-							style={itemStyles(item?.type)}
+							style={itemStyles(item)}
 						>
 							<Content {item} sectionName={section?.name} />
+							<ItemResizeHandle {item} />
 						</div>
 					{/each}
 				</div>
@@ -417,9 +445,9 @@
 <style>
 	main {
 		grid-area: main;
-		padding: 0 2rem 2rem;
+		padding: 0 var(--fusion-main-pad-x, 2rem) 2rem;
 		display: grid;
-		gap: 1.5rem;
+		gap: var(--fusion-section-gap, 1.5rem);
 		outline: transparent;
 		align-content: start;
 	}
@@ -433,7 +461,7 @@
 		display: grid;
 		grid-auto-flow: column;
 		grid-auto-columns: 1fr;
-		gap: 2rem;
+		gap: var(--fusion-stack-gap, 2rem);
 		border-radius: 0.65rem;
 		outline-offset: 3px;
 	}
@@ -441,36 +469,25 @@
 	.items {
 		border-radius: 0.75rem;
 		outline-offset: -2px;
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr));
-		grid-auto-rows: min-content;
-		gap: 0.65rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: flex-start;
+		align-items: stretch;
+		gap: var(--fusion-gap, 0.65rem);
 		height: 100%;
-	}
-
-	@media (min-width: 640px) and (max-width: 1023px) {
-		.items {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			gap: 0.75rem;
-		}
-	}
-
-	@media (max-width: 639px) {
-		.items {
-			grid-template-columns: 1fr;
-			gap: 0.6rem;
-		}
 	}
 
 	.item {
 		position: relative;
-		border-radius: 0.65rem;
+		border-radius: var(--fusion-card-radius, 0.65rem);
+		box-sizing: border-box;
+		min-width: 0;
 	}
 
 	/* Phone and Tablet (portrait) */
 	@media all and (max-width: 768px) {
 		main {
-			padding: 0 1.25rem 1.25rem 1.25rem;
+			padding: 0 min(1.25rem, var(--fusion-main-pad-x, 2rem)) 1.25rem;
 		}
 
 		.horizontal-stack {
@@ -478,8 +495,10 @@
 			gap: 1.5rem;
 		}
 
-		.items {
-			grid-template-columns: 1fr;
+		.items .item {
+			flex: 1 1 100%;
+			width: 100% !important;
+			max-width: 100%;
 		}
 	}
 

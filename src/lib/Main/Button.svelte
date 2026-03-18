@@ -108,14 +108,25 @@
 			const u = attributes.temperature_unit || attributes.unit_of_measurement || '';
 			return u ? `${attributes.current_temperature} ${u}` : String(attributes.current_temperature);
 		}
-		if (d === 'fan' && stateOn && attributes.percentage != null) {
-			return `${attributes.percentage}%`;
-		}
 		if (d === 'humidifier' && attributes.humidity != null) {
 			return `${attributes.humidity}%`;
 		}
 		return undefined;
 	})();
+
+	/** Large square / icon-first tiles (matches dashboard.yaml shape + icon_size + height) */
+	$: isTile =
+		sel?.shape === 'square' ||
+		Boolean(
+			sel?.icon_size && sel?.height && /px/i.test(String(sel.height))
+		);
+	$: cardMinHeight =
+		isTile && sel?.height?.trim()
+			? sel.height.trim()
+			: isTile
+				? '7.5rem'
+				: `${$itemHeight}px`;
+	$: iconSizeVar = sel?.icon_size?.trim() || '';
 
 	/**
 	 * Toggles the state of the specified entity
@@ -468,6 +479,7 @@
 
 <div
 	class="button-wrap"
+	class:tile-fill={isTile}
 	bind:this={container}
 	data-state={stateOn}
 	tabindex="-1"
@@ -476,11 +488,12 @@
 	on:pointerdown={handlePointer}
 >
 	<DashboardCard
+		variant={isTile ? 'tile' : 'row'}
 		active={stateOn}
 		glowColor={iconColor}
 		editMode={$editMode}
-		minHeight="{$itemHeight}px"
-		{sublabel}
+		minHeight={cardMinHeight}
+		sublabel={isTile ? undefined : sublabel}
 		rippleOptions={!$editMode
 			? {
 					...$ripple,
@@ -504,8 +517,10 @@
 		>
 			<div
 				class="icon"
+				class:icon-tile={isTile}
 				class:icon-active={stateOn}
-				class:icon-pulse={stateOn && !loading}
+				class:icon-pulse={stateOn && !loading && !isTile}
+				style:--icon-size={iconSizeVar || undefined}
 				style:--icon-color={iconColor}
 				style:background-color={sel?.template?.color && template?.color?.output
 					? template?.color?.output
@@ -539,17 +554,18 @@
 
 		<div
 			class="right"
+			class:right-tile={isTile}
 			on:click|stopPropagation={handleEvent}
 			on:keydown
 			role="button"
 			tabindex="0"
 		>
-			<div class="name" class:name-on={stateOn}>
+			<div class="name" class:name-tile={isTile} class:name-on={stateOn}>
 				{@html (sel?.template?.name && template?.name?.output) ||
 					getName(sel, entity, sectionName) ||
 					$lang('unknown')}
 			</div>
-			<div class="state" class:state-on={stateOn}>
+			<div class="state" class:state-tile={isTile} class:state-on={stateOn}>
 				{#if marquee}
 					<div style="width: min-content;" bind:clientWidth={contentWidth}>
 						{#if sel?.state || (sel?.template?.state && template?.state?.output)}
@@ -581,8 +597,11 @@
 		font-family: 'Inter Variable', Inter, system-ui, sans-serif;
 		width: 100%;
 		height: 100%;
+		min-height: inherit;
 		margin: 0;
 		transform: translateZ(0);
+		display: flex;
+		flex-direction: column;
 	}
 
 	.image {
@@ -605,13 +624,46 @@
 		text-align: left;
 	}
 
+	.right-tile {
+		text-align: center;
+		align-items: center;
+		justify-content: flex-end;
+		flex: 1;
+		min-height: 0;
+		padding-bottom: 0.15rem;
+	}
+
+	.name-tile {
+		font-size: 0.72rem;
+		font-weight: 600;
+		line-height: 1.2;
+		white-space: normal;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.state-tile {
+		font-size: 0.68rem;
+		margin-top: 0.1rem;
+		white-space: normal;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
 	.icon {
 		--icon-size: 2.35rem;
 		height: var(--icon-size);
 		width: var(--icon-size);
+		max-width: 100%;
+		max-height: 100%;
 		color: rgba(255, 255, 255, 0.55);
 		background-color: rgba(0, 0, 0, 0.22);
 		border-radius: 50%;
+		flex-shrink: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -624,6 +676,11 @@
 			background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
 			box-shadow 320ms ease,
 			transform 200ms ease;
+	}
+
+	.icon-tile {
+		border-radius: 0.9rem;
+		padding: 0.4rem;
 	}
 
 	.icon-active {
@@ -683,9 +740,26 @@
 		text-overflow: ellipsis;
 	}
 
-	/* Phone: one column grid — full width cards */
+	.tile-fill {
+		min-height: 100%;
+	}
+
+	.tile-fill :global(.dashboard-card-press) {
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.tile-fill :global(.dashboard-card-surface) {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		min-height: 0 !important;
+	}
+
 	@media all and (max-width: 768px) {
-		.button-wrap {
+		.button-wrap:not(.tile-fill) {
 			width: 100%;
 			max-width: 100%;
 		}

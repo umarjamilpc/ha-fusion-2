@@ -19,6 +19,17 @@ export interface Addons {
 	};
 }
 
+/** Saved in dashboard.yaml — grid density, defaults, resizable baseline */
+export interface DashboardUi {
+	/** Default width for buttons without explicit width (e.g. 14.5rem, 220px) */
+	default_button_width?: string;
+	grid_gap?: string;
+	section_gap?: string;
+	horizontal_stack_gap?: string;
+	card_radius?: string;
+	main_padding_x?: string;
+}
+
 export interface Dashboard {
 	views: Views[];
 	sidebar: SidebarItem[];
@@ -26,6 +37,7 @@ export interface Dashboard {
 	hide_views?: boolean;
 	hide_sidebar?: boolean;
 	sidebarWidth?: number;
+	ui?: DashboardUi;
 }
 
 export interface Views {
@@ -88,6 +100,10 @@ export interface ButtonItem {
 	color?: string;
 	marquee?: boolean;
 	more_info?: boolean;
+	width?: string;
+	height?: string;
+	icon_size?: string;
+	shape?: string;
 	service?: string;
 	state: any;
 	template?: {
