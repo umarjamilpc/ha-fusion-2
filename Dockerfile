@@ -1,15 +1,14 @@
-# Builder: full Node image (needed for arm/v7 and native deps during vite build)
-FROM node:22-bookworm-slim AS builder
+# Builder: full Debian image (better arm/v7 + native deps under QEMU than slim)
+FROM node:22-bookworm AS builder
 WORKDIR /app
 
-# Install dependencies first (better layer cache)
 COPY package.json package-lock.json ./
-RUN npm ci
+# npm install (not ci): survives package.json ↔ lockfile drift from Dependabot / manual bumps
+RUN npm install --include=dev
 
 COPY . .
 RUN npm run build && npm prune --omit=dev
 
-# Runtime: small Alpine image
 FROM node:22-alpine AS runner
 WORKDIR /app
 
